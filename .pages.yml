@@ -8,36 +8,71 @@ content:
     type: file
     path: content.json
     fields:
-      - name: heroLead
-        label: Intro line (top of the page)
-        type: text
-      - name: bundlePrice
-        label: Bundle price (e.g. US$29)
-        type: string
-      - name: amazonFlags
-        label: "Amazon link — National Flags book"
-        type: string
-      - name: amazonDinos
-        label: "Amazon link — Dinos in the Caribbean"
-        type: string
-      - name: amazonFruits
-        label: "Amazon link — Fruits of the Caribbean"
-        type: string
-      - name: amazonBirds
-        label: "Amazon link — National Birds book"
-        type: string
-      - name: instagramUrl
-        label: Instagram profile URL
-        type: string
-      - name: whatsappNumber
-        label: "WhatsApp / phone number — digits only (e.g. 18684665437)"
-        type: string
-      - name: phoneDisplay
-        label: Phone number as shown on the site
-        type: string
-      - name: email
-        label: Contact email
-        type: string
-      - name: address
-        label: Address / location
-        type: text
+      - name: hero
+        label: Hero (top of page)
+        type: object
+        fields:
+          - { name: eyebrow, label: Small label above the title, type: string }
+          - { name: headline, label: "Headline (first part)", type: string }
+          - { name: headlinePop, label: "Headline (coloured part)", type: string }
+          - { name: lead, label: Intro paragraph, type: text }
+          - { name: logo, label: Logo image, type: image }
+      - name: books
+        label: Books
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: cover, label: Cover image, type: image }
+          - { name: description, label: Description, type: text }
+          - { name: tags, label: "Tags (comma-separated)", type: string }
+          - { name: amazon, label: Amazon link, type: string }
+      - name: peek
+        label: Peek-inside images
+        type: object
+        list: true
+        fields:
+          - { name: image, label: Page image, type: image }
+          - { name: caption, label: Caption, type: string }
+      - name: why
+        label: Why parents love them (cards)
+        type: object
+        list: true
+        fields:
+          - { name: icon, label: "Icon (emoji)", type: string }
+          - { name: title, label: Title, type: string }
+          - { name: text, label: Text, type: text }
+      - name: bundle
+        label: Bundle offer
+        type: object
+        fields:
+          - { name: heading, label: Heading, type: string }
+          - { name: blurb, label: Description, type: text }
+          - { name: price, label: Price, type: string }
+          - { name: priceNote, label: Small note under price, type: string }
+          - { name: items, label: "What's included", type: string, list: true }
+      - name: about
+        label: About / Our story
+        type: object
+        fields:
+          - { name: heading, label: Heading, type: string }
+          - { name: photo, label: Founder photo, type: image }
+          - { name: body1, label: Paragraph 1, type: text }
+          - { name: body2, label: Paragraph 2, type: text }
+      - name: reviews
+        label: Reviews
+        type: object
+        list: true
+        fields:
+          - { name: stars, label: "Stars (1-5)", type: number }
+          - { name: quote, label: Quote, type: text }
+          - { name: author, label: Who said it, type: string }
+      - name: contact
+        label: Contact details
+        type: object
+        fields:
+          - { name: phoneDisplay, label: Phone shown on site, type: string }
+          - { name: whatsappNumber, label: "WhatsApp/phone digits only", type: string }
+          - { name: email, label: Email, type: string }
+          - { name: address, label: Address, type: text }
+          - { name: instagramUrl, label: Instagram URL, type: string }

@@ -72,6 +72,7 @@
   .btn--sun{--bg:var(--sun);--fg:var(--navy);}
   .btn--green{--bg:var(--green);--fg:#fff;}
   .btn--ghost{--bg:transparent;--fg:var(--navy);border:3px solid var(--navy);box-shadow:none;}
+  .btn--navy{--bg:var(--navy);--fg:#fff;}
   .btn--lg{font-size:1.2rem;padding:1em 2em;}
 
   .eyebrow{
@@ -345,6 +346,22 @@
   #toTop.show{opacity:1;pointer-events:auto;}
   #toTop:hover{transform:translateY(-4px);}
 
+  /* ---------- preview gate + ribbon (removed at handoff) ---------- */
+  #preview-gate{position:fixed;inset:0;z-index:99999;background:linear-gradient(160deg,#0b1e5b,#10309a);
+    display:flex;align-items:center;justify-content:center;padding:1.5rem;}
+  #preview-gate .box{background:#fff;border-radius:22px;padding:2.2rem;max-width:390px;width:100%;text-align:center;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.55);}
+  #preview-gate .box .em{font-size:2.4rem;}
+  #preview-gate h2{font-family:'Baloo 2';color:var(--navy);font-size:1.6rem;margin:.3rem 0 .2rem;}
+  #preview-gate p{color:var(--ink-soft);font-size:.95rem;margin:0 0 1.1rem;}
+  #preview-gate input{width:100%;border:2px solid #e4e9f3;border-radius:12px;padding:.75em .9em;font:inherit;background:#fbfcff;}
+  #preview-gate input:focus{outline:none;border-color:var(--ocean);box-shadow:0 0 0 4px rgba(28,160,227,.16);}
+  #preview-gate button{width:100%;margin-top:.7rem;justify-content:center;}
+  #preview-gate .err{color:var(--coral);font-weight:700;font-size:.85rem;min-height:1.1em;margin-top:.5rem;}
+  #preview-ribbon{position:fixed;top:18px;left:-52px;transform:rotate(-45deg);z-index:99998;
+    background:var(--coral);color:#fff;font-family:'Baloo 2';font-weight:700;font-size:.72rem;letter-spacing:.05em;
+    padding:.35em 3.6em;box-shadow:var(--shadow-sm);pointer-events:none;}
+
   /* ---------- small-screen / mobile polish ---------- */
   @media(max-width:560px){
     .hero{padding-top:7rem;}
@@ -379,6 +396,48 @@
 </style>
 </head>
 <body>
+
+<!-- ============ PREVIEW GATE (remove at handoff: set PREVIEW_MODE=false below) ============ -->
+<div id="preview-ribbon">PREVIEW · NOT LICENSED</div>
+<div id="preview-gate">
+  <div class="box">
+    <div class="em">🌴</div>
+    <h2>Private preview</h2>
+    <p>This is a proof-of-concept site for Caribbean for Kids. Enter the password to view it.</p>
+    <input id="pg-input" type="password" placeholder="Password" aria-label="Password" autocomplete="off">
+    <button class="btn btn--coral" id="pg-go" type="button">View site</button>
+    <div class="err" id="pg-err"></div>
+  </div>
+</div>
+<script>
+  /* ===========================================================
+     PREVIEW GATE — to hand the finished site over, set
+     PREVIEW_MODE = false (the gate AND the corner ribbon vanish).
+     Change PREVIEW_PASSWORD to whatever you share with the client.
+     Note: this is a deterrent for casual viewers, not hard security
+     (a static site's content is always viewable in the page source).
+     =========================================================== */
+  var PREVIEW_MODE = true;
+  var PREVIEW_PASSWORD = "caribbean2026";
+  (function(){
+    var gate=document.getElementById('preview-gate');
+    var ribbon=document.getElementById('preview-ribbon');
+    if(!PREVIEW_MODE){ if(gate) gate.remove(); if(ribbon) ribbon.remove(); return; }
+    try{ if(sessionStorage.getItem('cfk-preview')==='ok' && gate){ gate.remove(); } }catch(e){}
+    var input=document.getElementById('pg-input');
+    var go=document.getElementById('pg-go');
+    var err=document.getElementById('pg-err');
+    function attempt(){
+      if(input && input.value===PREVIEW_PASSWORD){
+        try{ sessionStorage.setItem('cfk-preview','ok'); }catch(e){}
+        if(gate) gate.remove();
+      } else if(err){ err.textContent='Incorrect password — please try again.'; if(input) input.select(); }
+    }
+    if(go) go.addEventListener('click',attempt);
+    if(input) input.addEventListener('keydown',function(e){ if(e.key==='Enter') attempt(); });
+    if(input) input.focus();
+  })();
+</script>
 
 <!-- ============ NAV ============ -->
 <header class="nav" id="nav">
@@ -421,12 +480,12 @@
 
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <span class="eyebrow">Fun • Educational • Caribbean-Inspired</span>
-      <h1>The Caribbean, <span class="pop">colour&nbsp;by&nbsp;colour.</span></h1>
+      <span class="eyebrow" id="cms-hero-eyebrow">Fun • Educational • Caribbean-Inspired</span>
+      <h1 id="cms-h1">The Caribbean, <span class="pop">colour&nbsp;by&nbsp;colour.</span></h1>
       <p class="lead" id="cms-lead">Vibrant activity &amp; colouring books that turn island flags, birds, fruits and dinosaurs into hours of learning and creative play — made for curious kids ages 3–10.</p>
       <div class="hero-cta">
         <a href="#books" class="btn btn--coral btn--lg">Explore the books</a>
-        <a href="#bundle" class="btn btn--sun btn--lg">See the 4-book bundle</a>
+        <a href="#bundle" class="btn btn--navy btn--lg">See the 4-book bundle</a>
       </div>
       <div class="hero-badges">
         <span class="hero-badge">⭐ Loved by parents &amp; teachers</span>
@@ -436,7 +495,7 @@
     </div>
 
     <div class="hero-art">
-      <img class="logo-img" src="assets/logo.jpg" width="1100" height="855"
+      <img class="logo-img" id="cms-logo" src="assets/logo.jpg" width="1100" height="855"
            alt="Caribbean for Kids — two children reading a book together under palm trees">
     </div>
   </div>
@@ -462,7 +521,7 @@
       <p class="section-sub center reveal">Each book blends colouring, puzzles and real facts about the region — so kids create <em>and</em> learn.</p>
     </div>
 
-    <div class="books-grid">
+    <div class="books-grid" id="books-grid">
       <!-- FLAGS -->
       <article class="book-card reveal d1">
         <div class="cover">
@@ -547,7 +606,7 @@
       <h2 class="section-title reveal">Screen-free learning, island style</h2>
       <p class="section-sub center reveal">Grown-ups get the educational value; little ones just think they're having fun. Everybody wins.</p>
     </div>
-    <div class="why-grid">
+    <div class="why-grid" id="why-grid">
       <div class="why-card reveal d1"><div class="ico">🎨</div><h3>Create &amp; colour</h3><p>Activity-packed pages that build focus, fine motor skills and a whole lot of pride.</p></div>
       <div class="why-card reveal d2"><div class="ico">🧠</div><h3>Sneaky learning</h3><p>Real facts about flags, birds, fruits and dinos — geography and nature without the homework feeling.</p></div>
       <div class="why-card reveal d3"><div class="ico">🌴</div><h3>Proudly Caribbean</h3><p>Kids see their region celebrated — a meaningful gift for home, classroom or homeschooling.</p></div>
@@ -562,10 +621,10 @@
     <div class="bundle reveal">
       <div>
         <span class="eyebrow" style="background:rgba(255,200,61,.2);color:var(--sun);">Best value</span>
-        <h2>The 4-Book Bundle</h2>
-        <p style="opacity:.9;max-width:42ch;">All four activity books in one fun, educational gift from the Caribbean — designed to keep kids engaged while they learn.</p>
-        <div class="price"><span id="cms-price">US$29</span><small>Special bundle price · all 4 books + pencils</small></div>
-        <ul>
+        <h2 id="cms-bundle-heading">The 4-Book Bundle</h2>
+        <p style="opacity:.9;max-width:42ch;" id="cms-bundle-blurb">All four activity books in one fun, educational gift from the Caribbean — designed to keep kids engaged while they learn.</p>
+        <div class="price"><span id="cms-price">US$29</span><small id="cms-price-note">Special bundle price · all 4 books + pencils</small></div>
+        <ul id="bundle-list">
           <li>All 4 activity &amp; colouring books</li>
           <li>Colouring activities &amp; word puzzles</li>
           <li>Fun trivia on every page</li>
@@ -573,7 +632,7 @@
         </ul>
         <a href="#contact" class="btn btn--sun btn--lg">Order the bundle</a>
       </div>
-      <div class="bundle-books" aria-hidden="true">
+      <div class="bundle-books" id="bundle-books" aria-hidden="true">
         <div class="mini"><img src="assets/cover-flags.jpg" alt=""></div>
         <div class="mini"><img src="assets/cover-dinos.jpg" alt=""></div>
         <div class="mini"><img src="assets/cover-fruits.jpg" alt=""></div>
@@ -586,15 +645,15 @@
 <!-- ============ ABOUT ============ -->
 <section class="section about" id="about">
   <div class="wrap about-grid">
-    <div class="about-photo ph reveal">
+    <div class="about-photo ph reveal" id="cms-about-photo">
       <span class="ph-ico">📸</span>
       <span>A friendly photo of the<br>founder goes here</span>
     </div>
     <div class="reveal d1">
       <span class="eyebrow">Our story</span>
-      <h2 class="section-title">Made by Caribbean people, for Caribbean kids</h2>
-      <p>Caribbean for Kids began with a simple idea: children deserve learning materials that look like home. What started as one colouring book has grown into a series that celebrates the flags, wildlife, flavours and wonder of the islands — all designed to make kids excited to learn.</p>
-      <p>Every book is crafted to be fun first and educational always, so curiosity grows page after page. <strong>[We'll drop in the founder's real bio &amp; mission once Jamal sends it.]</strong></p>
+      <h2 class="section-title" id="cms-about-heading">Made by Caribbean people, for Caribbean kids</h2>
+      <p id="cms-about-body1">Caribbean for Kids began with a simple idea: children deserve learning materials that look like home. What started as one colouring book has grown into a series that celebrates the flags, wildlife, flavours and wonder of the islands — all designed to make kids excited to learn.</p>
+      <p id="cms-about-body2">Every book is crafted to be fun first and educational always, so curiosity grows page after page.</p>
       <a href="#contact" class="btn btn--green">Work with us</a>
     </div>
   </div>
@@ -608,7 +667,7 @@
       <h2 class="section-title reveal">What parents &amp; teachers say</h2>
       <p class="section-sub center reveal">Real stories from the families and classrooms who've made these books part of their day.</p>
     </div>
-    <div class="review-grid">
+    <div class="review-grid" id="review-grid">
       <div class="review reveal d1"><div class="stars">★★★★★</div><p>"My daughter learned every Caribbean flag without realising she was studying. Beautiful, sturdy pages too."</p><div class="who">— Sample Parent Review</div></div>
       <div class="review reveal d2"><div class="stars">★★★★★</div><p>"I use these in my Grade 1 class for culture lessons. The kids fight over who gets the dinosaur book!"</p><div class="who">— Sample Teacher Review</div></div>
       <div class="review reveal d3"><div class="stars">★★★★★</div><p>"Finally, activity books that celebrate where we're from. Bought the bundle for all three of my kids."</p><div class="who">— Sample Parent Review</div></div>
@@ -697,16 +756,20 @@
   },{threshold:.15});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  // subtle 3D tilt on book cards
-  document.querySelectorAll('.book-card').forEach(card=>{
-    card.addEventListener('mousemove',e=>{
-      const r=card.getBoundingClientRect();
-      const x=(e.clientX-r.left)/r.width-.5;
-      const y=(e.clientY-r.top)/r.height-.5;
-      card.style.transform=`perspective(800px) rotateY(${x*6}deg) rotateX(${-y*6}deg) translateY(-6px)`;
+  // subtle 3D tilt on book cards (re-callable so re-rendered cards keep it)
+  function attachCardTilt(){
+    document.querySelectorAll('.book-card').forEach(card=>{
+      if(card._tilt)return; card._tilt=true;
+      card.addEventListener('mousemove',e=>{
+        const r=card.getBoundingClientRect();
+        const x=(e.clientX-r.left)/r.width-.5;
+        const y=(e.clientY-r.top)/r.height-.5;
+        card.style.transform=`perspective(800px) rotateY(${x*6}deg) rotateX(${-y*6}deg) translateY(-6px)`;
+      });
+      card.addEventListener('mouseleave',()=>{card.style.transform='';});
     });
-    card.addEventListener('mouseleave',()=>{card.style.transform='';});
-  });
+  }
+  attachCardTilt();
 
   // peek-inside slider arrows
   (function(){
@@ -719,36 +782,62 @@
     prev.addEventListener('click',()=>track.scrollBy({left:-step(),behavior:'smooth'}));
   })();
 
-  // ----- Editable content (Pages CMS) -----
-  // Loads content.json and overrides the editable fields. If the file is missing
-  // (e.g. opening the page locally), the baked-in defaults above are kept. No build step.
+  // ===== Editable content (Pages CMS) =====
+  // The page ships with full default content baked into the HTML above, so it always
+  // works (even opened locally or if content.json is missing). When content.json loads,
+  // the editable sections below are re-rendered from it. Edited via app.pagescms.org.
   (function(){
+    function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+    function at(s){return String(s==null?'':s).replace(/"/g,'&quot;');}
+    function el(id){return document.getElementById(id);}
+    function setText(id,v){var e=el(id); if(e&&v!=null&&v!=='') e.textContent=v;}
+    function setHTML(id,h){var e=el(id); if(e&&h!=null) e.innerHTML=h;}
+    function setSrc(id,v){var e=el(id); if(e&&v) e.setAttribute('src',v);}
+    function setHref(id,v){var e=el(id); if(e&&v) e.setAttribute('href',v);}
+
+    function tagsHTML(t){return String(t||'').split(',').map(function(x){return x.trim();}).filter(Boolean)
+      .map(function(x){return '<span class="tag">'+esc(x)+'</span>';}).join('');}
+    function bookCard(b){return '<article class="book-card">'
+      +'<div class="cover"><img class="cover-photo" loading="lazy" src="'+at(b.cover)+'" alt="'+at(b.title)+'"></div>'
+      +'<h3>'+esc(b.title)+'</h3><p>'+esc(b.description)+'</p>'
+      +'<div class="tags">'+tagsHTML(b.tags)+'</div>'
+      +(b.amazon?'<a href="'+at(b.amazon)+'" class="btn btn--green buy" target="_blank" rel="noopener">Buy on Amazon</a>':'')
+      +'</article>';}
+    function bundleThumb(b){return '<div class="mini"><img src="'+at(b.cover)+'" alt=""></div>';}
+    function peekSlide(p){return '<figure class="peek-slide"><img loading="lazy" src="'+at(p.image)+'" alt="'+at(p.caption)+'"><figcaption class="cap">'+esc(p.caption)+'</figcaption></figure>';}
+    function whyCard(w){return '<div class="why-card"><div class="ico">'+esc(w.icon)+'</div><h3>'+esc(w.title)+'</h3><p>'+esc(w.text)+'</p></div>';}
+    function reviewCard(r){var n=Math.max(0,Math.min(5,parseInt(r.stars,10)||5));return '<div class="review"><div class="stars">'+new Array(n+1).join('★')+'</div><p>'+esc(r.quote)+'</p><div class="who">'+esc(r.author)+'</div></div>';}
+
     fetch('content.json',{cache:'no-store'})
       .then(function(r){return r.ok?r.json():null;})
       .then(function(c){
         if(!c)return;
-        var txt=function(id,v){var el=document.getElementById(id); if(el&&v!=null&&v!=='') el.textContent=v;};
-        var href=function(id,v){var el=document.getElementById(id); if(el&&v!=null&&v!=='') el.setAttribute('href',v);};
-        txt('cms-lead', c.heroLead);
-        txt('cms-price', c.bundlePrice);
-        href('cms-amz-flags', c.amazonFlags);
-        href('cms-amz-dinos', c.amazonDinos);
-        href('cms-amz-fruits', c.amazonFruits);
-        href('cms-amz-birds', c.amazonBirds);
-        href('cms-instagram', c.instagramUrl);
-        txt('cms-address', c.address);
-        if(c.whatsappNumber){
-          var w=document.getElementById('cms-whatsapp');
-          if(w) w.setAttribute('href','https://wa.me/'+c.whatsappNumber+'?text=Hi%20Caribbean%20for%20Kids!%20I%27d%20like%20to%20ask%20about%20your%20books.');
-        }
-        if(c.phoneDisplay){
-          var p=document.getElementById('cms-phone');
-          if(p){p.textContent=c.phoneDisplay; if(c.whatsappNumber) p.setAttribute('href','tel:+'+c.whatsappNumber);}
-        }
-        if(c.email){
-          var e=document.getElementById('cms-email');
-          if(e){e.textContent=c.email; e.setAttribute('href','mailto:'+c.email);}
-        }
+        try{ if(c.hero){ setText('cms-hero-eyebrow',c.hero.eyebrow);
+          if(c.hero.headline||c.hero.headlinePop){var h=el('cms-h1'); if(h) h.innerHTML=esc(c.hero.headline)+' <span class="pop">'+esc(c.hero.headlinePop)+'</span>';}
+          setText('cms-lead',c.hero.lead); setSrc('cms-logo',c.hero.logo); } }catch(e){}
+
+        try{ if(Array.isArray(c.books)&&c.books.length){
+          setHTML('books-grid', c.books.map(bookCard).join(''));
+          setHTML('bundle-books', c.books.map(bundleThumb).join(''));
+          attachCardTilt();
+        } }catch(e){}
+
+        try{ if(Array.isArray(c.peek)&&c.peek.length){ setHTML('peekTrack', c.peek.map(peekSlide).join('')); } }catch(e){}
+        try{ if(Array.isArray(c.why)&&c.why.length){ setHTML('why-grid', c.why.map(whyCard).join('')); } }catch(e){}
+        try{ if(Array.isArray(c.reviews)&&c.reviews.length){ setHTML('review-grid', c.reviews.map(reviewCard).join('')); } }catch(e){}
+
+        try{ if(c.bundle){ setText('cms-bundle-heading',c.bundle.heading); setText('cms-bundle-blurb',c.bundle.blurb);
+          setText('cms-price',c.bundle.price); setText('cms-price-note',c.bundle.priceNote);
+          if(Array.isArray(c.bundle.items)&&c.bundle.items.length) setHTML('bundle-list', c.bundle.items.map(function(s){return '<li>'+esc(s)+'</li>';}).join('')); } }catch(e){}
+
+        try{ if(c.about){ setText('cms-about-heading',c.about.heading); setText('cms-about-body1',c.about.body1); setText('cms-about-body2',c.about.body2);
+          if(c.about.photo){var ap=el('cms-about-photo'); if(ap) ap.innerHTML='<img src="'+at(c.about.photo)+'" alt="The founder of Caribbean for Kids" style="width:100%;height:100%;object-fit:cover;border-radius:var(--r-lg);">';} } }catch(e){}
+
+        try{ if(c.contact){ var ct=c.contact;
+          setText('cms-address',ct.address); setHref('cms-instagram',ct.instagramUrl);
+          if(ct.whatsappNumber){ var w=el('cms-whatsapp'); if(w) w.setAttribute('href','https://wa.me/'+ct.whatsappNumber+'?text=Hi%20Caribbean%20for%20Kids!%20I%27d%20like%20to%20ask%20about%20your%20books.'); }
+          if(ct.phoneDisplay){ var p=el('cms-phone'); if(p){ p.textContent=ct.phoneDisplay; if(ct.whatsappNumber) p.setAttribute('href','tel:+'+ct.whatsappNumber); } }
+          if(ct.email){ var em=el('cms-email'); if(em){ em.textContent=ct.email; em.setAttribute('href','mailto:'+ct.email); } } } }catch(e){}
       })
       .catch(function(){});
   })();

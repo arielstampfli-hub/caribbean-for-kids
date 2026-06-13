@@ -1,13 +1,83 @@
 {
-  "heroLead": "Vibrant activity & colouring books that turn island flags, birds, fruits and dinosaurs into hours of learning and creative play — made for curious kids ages 3–10.",
-  "bundlePrice": "US$29",
-  "amazonFlags": "https://www.amazon.com/dp/B0CVBCLGQ1",
-  "amazonDinos": "https://www.amazon.com/dp/B0CSYLJKFS",
-  "amazonFruits": "https://www.amazon.com/dp/B0CVTMKWNB",
-  "amazonBirds": "https://www.amazon.com/dp/B0CV91JKKS",
-  "instagramUrl": "https://instagram.com/caribbeanforkids",
-  "whatsappNumber": "18684665437",
-  "phoneDisplay": "1-868-466-KIDS (5437)",
-  "email": "hello@caribbeanforkids.com",
-  "address": "Trini Smart Driver, Heartland Plaza, Endeavour"
+  "hero": {
+    "eyebrow": "Fun • Educational • Caribbean-Inspired",
+    "headline": "The Caribbean,",
+    "headlinePop": "colour by colour.",
+    "lead": "Vibrant activity & colouring books that turn island flags, birds, fruits and dinosaurs into hours of learning and creative play — made for curious kids ages 3–10.",
+    "logo": "assets/logo.jpg"
+  },
+  "books": [
+    {
+      "title": "National Flags of the Caribbean",
+      "cover": "assets/cover-flags.jpg",
+      "description": "Colour the flags that tell each island's story, with fun facts about every nation tucked alongside. A bright intro to geography and culture.",
+      "tags": "Colouring, Geography, Fun facts",
+      "amazon": "https://www.amazon.com/dp/B0CVBCLGQ1"
+    },
+    {
+      "title": "Dinos in the Caribbean",
+      "cover": "assets/cover-dinos.jpg",
+      "description": "A T-Rex on the beach, a Triceratops in the rainforest. Colouring, riddles, word searches and crosswords meet prehistoric island fun.",
+      "tags": "Colouring, Puzzles, Riddles",
+      "amazon": "https://www.amazon.com/dp/B0CSYLJKFS"
+    },
+    {
+      "title": "Fruits of the Caribbean",
+      "cover": "assets/cover-fruits.jpg",
+      "description": "From succulent mangoes to tangy five-fingers — a juicy adventure of colours, shapes and flavours through the region's most beloved fruits.",
+      "tags": "Colouring, Puzzles, Nature",
+      "amazon": "https://www.amazon.com/dp/B0CVTMKWNB"
+    },
+    {
+      "title": "National Birds of the Caribbean",
+      "cover": "assets/cover-birds.jpg",
+      "description": "From the colourful Cuban Trogon to the majestic Scarlet Ibis — stunning illustrations, puzzles and facts that spark a love of nature.",
+      "tags": "Colouring, Wildlife, Fun facts",
+      "amazon": "https://www.amazon.com/dp/B0CV91JKKS"
+    }
+  ],
+  "peek": [
+    { "image": "assets/inside-dinos-funfact.jpg", "caption": "Dinos in the Caribbean — facts + colouring" },
+    { "image": "assets/inside-birds-woodpecker.jpg", "caption": "National Birds — meet & colour each bird" },
+    { "image": "assets/inside-flags-dominica.jpg", "caption": "National Flags — colour-the-flag + facts" },
+    { "image": "assets/inside-crosswords.jpg", "caption": "Dinos in the Caribbean — Jurassic crosswords" },
+    { "image": "assets/inside-birds-wordsearch.jpg", "caption": "National Birds — word-search puzzles" },
+    { "image": "assets/inside-flags-trinidad.jpg", "caption": "National Flags — every nation to colour" }
+  ],
+  "why": [
+    { "icon": "🎨", "title": "Create & colour", "text": "Activity-packed pages that build focus, fine motor skills and a whole lot of pride." },
+    { "icon": "🧠", "title": "Sneaky learning", "text": "Real facts about flags, birds, fruits and dinos — geography and nature without the homework feeling." },
+    { "icon": "🌴", "title": "Proudly Caribbean", "text": "Kids see their region celebrated — a meaningful gift for home, classroom or homeschooling." },
+    { "icon": "🎁", "title": "Gift-ready", "text": "Perfect for birthdays and holidays. The bundle even comes with coloured pencils." }
+  ],
+  "bundle": {
+    "heading": "The 4-Book Bundle",
+    "blurb": "All four activity books in one fun, educational gift from the Caribbean — designed to keep kids engaged while they learn.",
+    "price": "US$29",
+    "priceNote": "Special bundle price · all 4 books + pencils",
+    "items": [
+      "All 4 activity & colouring books",
+      "Colouring activities & word puzzles",
+      "Fun trivia on every page",
+      "Bonus 12-pack of coloured pencils"
+    ]
+  },
+  "about": {
+    "heading": "Made by Caribbean people, for Caribbean kids",
+    "photo": "",
+    "body1": "Caribbean for Kids began with a simple idea: children deserve learning materials that look like home. What started as one colouring book has grown into a series that celebrates the flags, wildlife, flavours and wonder of the islands — all designed to make kids excited to learn.",
+    "body2": "Every book is crafted to be fun first and educational always, so curiosity grows page after page."
+  },
+  "reviews": [
+    { "stars": 5, "quote": "My daughter learned every Caribbean flag without realising she was studying. Beautiful, sturdy pages too.", "author": "— Sample Parent Review" },
+    { "stars": 5, "quote": "I use these in my Grade 1 class for culture lessons. The kids fight over who gets the dinosaur book!", "author": "— Sample Teacher Review" },
+    { "stars": 5, "quote": "Finally, activity books that celebrate where we're from. Bought the bundle for all three of my kids.", "author": "— Sample Parent Review" }
+  ],
+  "contact": {
+    "phoneDisplay": "1-868-466-KIDS (5437)",
+    "whatsappNumber": "18684665437",
+    "email": "hello@caribbeanforkids.com",
+    "address": "Trini Smart Driver, Heartland Plaza, Endeavour",
+    "instagramUrl": "https://instagram.com/caribbeanforkids"
+  }
 }

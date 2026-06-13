@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Caribbean for Kids — Fun, Educational Activity Books for Ages 3–10</title>
+<meta name="description" content="Caribbean for Kids makes vibrant, educational activity and colouring books that bring the islands to life for children ages 3–10. Flags, birds, fruits, and dinosaurs of the Caribbean — available on Amazon." />
+
+<!-- Open Graph / social preview (placeholder image path) -->
+<meta property="og:title" content="Caribbean for Kids — Activity Books for Ages 3–10" />
+<meta property="og:description" content="Fun, educational, Caribbean-inspired activity books for kids. Colouring, puzzles, trivia and more." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="assets/social-preview.jpg" />
+
+<!-- Favicon (matches the header mark) -->
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --sun:#FFC83D;        /* sunny yellow */
+    --gold:#FFB300;
+    --green:#2EA84F;
+    --green-deep:#1F8A3B;
+    --ocean:#1CA0E3;
+    --navy:#0B1E5B;
+    --coral:#E8392B;
+    --orange:#FF7A1A;
+    --sand:#FDEBC8;
+    --cream:#FFFDF5;
+    --ink:#1d2433;
+    --ink-soft:#46506a;
+    --shadow:0 18px 40px -18px rgba(11,30,91,.35);
+    --shadow-sm:0 8px 22px -12px rgba(11,30,91,.4);
+    --r-lg:28px;
+    --r-md:18px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Nunito',system-ui,sans-serif;
+    color:var(--ink);
+    background-color:var(--cream);
+    background-image:radial-gradient(rgba(11,30,91,.035) 1px, transparent 1px);
+    background-size:26px 26px;
+    overflow-x:hidden;
+    line-height:1.6;
+  }
+  h1,h2,h3,.display{font-family:'Baloo 2',cursive;line-height:1.05;margin:0;}
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  .wrap{width:min(1150px,92vw);margin-inline:auto;}
+  .btn{
+    --bg:var(--coral); --fg:#fff;
+    display:inline-flex;align-items:center;gap:.55em;
+    background:var(--bg);color:var(--fg);
+    font-family:'Baloo 2',cursive;font-weight:700;font-size:1.05rem;
+    padding:.85em 1.6em;border-radius:999px;border:0;cursor:pointer;
+    text-decoration:none;box-shadow:var(--shadow-sm);
+    transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
+    white-space:nowrap;
+  }
+  .btn:hover{transform:translateY(-3px) scale(1.02);filter:brightness(1.05);box-shadow:0 16px 30px -14px rgba(232,57,43,.6);}
+  .btn:active{transform:translateY(0);}
+  .btn--sun{--bg:var(--sun);--fg:var(--navy);}
+  .btn--green{--bg:var(--green);--fg:#fff;}
+  .btn--ghost{--bg:transparent;--fg:var(--navy);border:3px solid var(--navy);box-shadow:none;}
+  .btn--lg{font-size:1.2rem;padding:1em 2em;}
+
+  .eyebrow{
+    display:inline-block;font-family:'Baloo 2',cursive;font-weight:700;
+    letter-spacing:.12em;text-transform:uppercase;font-size:.8rem;
+    color:var(--green-deep);background:rgba(46,168,79,.12);
+    padding:.4em 1em;border-radius:999px;margin-bottom:1rem;
+  }
+  .section{padding:clamp(3.5rem,8vw,7rem) 0;position:relative;}
+  .section-title{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;color:var(--navy);}
+  .section-sub{font-size:1.15rem;color:var(--ink-soft);max-width:46ch;}
+  .center{text-align:center;margin-inline:auto;}
+
+  .ph{position:relative;}
+  /* placeholder note tags fully hidden in the live design */
+  .ph-tag{display:none !important;}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    transition:background .3s ease, box-shadow .3s ease, padding .3s ease;
+    padding:.9rem 0;
+  }
+  header.nav.scrolled{background:rgba(255,253,245,.92);backdrop-filter:blur(10px);box-shadow:0 6px 20px -16px rgba(11,30,91,.6);padding:.5rem 0;}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+  .brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;font-family:'Baloo 2';font-weight:800;color:var(--navy);font-size:1.25rem;}
+  .brand .mark{width:42px;height:42px;flex:none;}
+  .nav-links{display:flex;align-items:center;gap:1.6rem;}
+  .nav-links a{font-family:'Baloo 2';font-weight:600;color:var(--navy);text-decoration:none;font-size:1.02rem;position:relative;}
+  .nav-links a:not(.btn)::after{content:"";position:absolute;left:0;bottom:-4px;height:3px;width:0;background:var(--coral);border-radius:3px;transition:width .25s ease;}
+  .nav-links a:not(.btn):hover::after{width:100%;}
+  .hamburger{display:none;background:none;border:0;cursor:pointer;padding:.4rem;}
+  .hamburger span{display:block;width:26px;height:3px;background:var(--navy);border-radius:3px;margin:5px 0;transition:.3s;}
+
+  @media(max-width:860px){
+    .nav-links{
+      position:fixed;inset:0 0 0 auto;width:min(78vw,320px);
+      flex-direction:column;justify-content:center;gap:1.6rem;
+      background:var(--cream);box-shadow:-20px 0 50px -20px rgba(11,30,91,.5);
+      transform:translateX(110%);transition:transform .35s ease;padding:2rem;
+    }
+    .nav-links.open{transform:translateX(0);}
+    .hamburger{display:block;z-index:60;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;padding:clamp(8rem,16vw,11rem) 0 clamp(4rem,9vw,7rem);overflow:hidden;
+    background:
+      radial-gradient(120% 90% at 80% -10%, #ffe07a 0%, var(--sun) 38%, #ffd24d 60%, transparent 61%),
+      linear-gradient(180deg,#ffe788 0%, #ffd34d 45%, #ffe9b0 100%);
+  }
+  /* sun rays */
+  .sun-rays{position:absolute;top:-160px;right:-140px;width:520px;height:520px;z-index:0;opacity:.55;
+    animation:spin 60s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .hero-grid{position:relative;z-index:3;display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center;}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;text-align:center;}}
+  .hero h1{font-size:clamp(2.6rem,7vw,4.6rem);font-weight:800;color:var(--navy);}
+  .hero h1 .pop{color:var(--coral);display:inline-block;}
+  .hero .lead{font-size:clamp(1.1rem,2.2vw,1.35rem);color:#3a4a2e;max-width:44ch;margin:1.2rem 0 1.8rem;}
+  @media(max-width:860px){.hero .lead{margin-inline:auto;}}
+  .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;}
+  @media(max-width:860px){.hero-cta{justify-content:center;}}
+  .hero-badges{display:flex;gap:1.4rem;margin-top:1.8rem;flex-wrap:wrap;}
+  @media(max-width:860px){.hero-badges{justify-content:center;}}
+  .hero-badge{display:flex;align-items:center;gap:.5rem;font-weight:700;color:var(--navy);font-size:.95rem;}
+  .hero-badge svg{flex:none;}
+
+  /* hero art: stacked books + reading kids logo zone */
+  .hero-art{position:relative;display:flex;justify-content:center;align-items:center;min-height:340px;}
+  .logo-img{width:min(460px,94%);height:auto;border-radius:26px;box-shadow:var(--shadow);
+    animation:bob 5s ease-in-out infinite;display:block;}
+  .logo-zone{
+    width:min(380px,80%);aspect-ratio:1/.86;border-radius:28px;position:relative;
+    background:linear-gradient(160deg,#5ec5ee 0%, #2ea6dd 55%, #1c84c4 100%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;
+    box-shadow:var(--shadow);animation:bob 5s ease-in-out infinite;overflow:hidden;
+    border:6px solid #fff;
+  }
+  .logo-zone::after{content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 50% 18%, rgba(255,255,255,.35), transparent 55%);pointer-events:none;}
+  .logo-zone .kids{font-size:4.4rem;line-height:1;filter:drop-shadow(0 6px 10px rgba(0,0,0,.22));position:relative;z-index:1;}
+  .logo-zone .sign{font-family:'Baloo 2';font-weight:800;color:#fff;text-align:center;position:relative;z-index:1;
+    font-size:clamp(1.4rem,4vw,2rem);text-shadow:0 2px 6px rgba(11,30,91,.45);padding:0 1rem;line-height:1.05;}
+  .logo-zone .sign small{display:block;color:#fff3c4;font-size:.46em;letter-spacing:.18em;margin-top:.3em;font-weight:600;}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-1deg);}50%{transform:translateY(-14px) rotate(1deg);}}
+
+  /* floating decorative emoji */
+  .floaty{position:absolute;z-index:2;font-size:2.6rem;animation:float 7s ease-in-out infinite;filter:drop-shadow(0 8px 8px rgba(0,0,0,.12));pointer-events:none;}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(0);}50%{transform:translateY(-22px) rotate(8deg);}}
+  @media(max-width:860px){.f-mango,.f-dino{display:none;}.floaty{font-size:1.9rem;}}
+
+  /* wave divider */
+  .wave{display:block;width:100%;height:auto;margin-bottom:-6px;}
+
+  /* ---------- MARQUEE ---------- */
+  .ticker{background:var(--green);color:#fff;padding:.8rem 0;overflow:hidden;white-space:nowrap;}
+  .ticker-track{display:inline-block;animation:marquee 28s linear infinite;font-family:'Baloo 2';font-weight:600;font-size:1.05rem;}
+  .ticker-track span{margin:0 2.4rem;}
+  .ticker:hover .ticker-track{animation-play-state:paused;}
+  @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* ---------- BOOKS ---------- */
+  .books-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2rem;margin-top:3rem;}
+  .book-card{
+    background:#fff;border-radius:var(--r-lg);padding:1.4rem;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;gap:1rem;position:relative;
+    transition:transform .25s ease, box-shadow .25s ease;transform-style:preserve-3d;
+  }
+  .book-card:hover{box-shadow:0 30px 50px -20px rgba(11,30,91,.4);}
+  /* placeholder cover art */
+  .cover{
+    aspect-ratio:1/1.3;border-radius:16px;position:relative;overflow:hidden;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3rem;
+    box-shadow:inset 0 0 0 4px rgba(255,255,255,.35), var(--shadow-sm);
+    transition:transform .25s ease;
+  }
+  .book-card:hover .cover{transform:translateY(-6px) rotate(-1.5deg);}
+  .cover .motif{font-size:2.6rem;line-height:1.1;text-align:center;filter:drop-shadow(0 4px 6px rgba(0,0,0,.18));}
+  .cover .ctitle{font-family:'Baloo 2';font-weight:800;color:#fff;text-align:center;font-size:1.15rem;
+    text-shadow:0 2px 0 rgba(0,0,0,.25);padding:0 .8rem;line-height:1.05;}
+  .cover .age{position:absolute;bottom:10px;background:var(--coral);color:#fff;font-family:'Baloo 2';font-weight:700;
+    font-size:.7rem;padding:.25em .8em;border-radius:999px;}
+  .cover .cover-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .cover--flags{background:linear-gradient(150deg,#ffd24d,#ffb300);}
+  .cover--dinos{background:linear-gradient(150deg,#19a7d6,#0e7fae);}
+  .cover--fruits{background:linear-gradient(150deg,#ff9a3d,#ef6a1e);}
+  .cover--birds{background:linear-gradient(150deg,#2bb3a3,#1c8fb0);}
+  .book-card h3{color:var(--navy);font-size:1.3rem;font-weight:800;}
+  .book-card p{color:var(--ink-soft);font-size:.98rem;margin:0;flex:1;}
+  .book-card .tags{display:flex;flex-wrap:wrap;gap:.4rem;}
+  .tag{background:var(--sand);color:#7a4e0a;font-weight:700;font-size:.84rem;padding:.38em .85em;border-radius:999px;}
+  .book-card .buy{margin-top:.3rem;}
+
+  /* ---------- PEEK INSIDE (slider) ---------- */
+  .peek{position:relative;overflow:hidden;
+    background:radial-gradient(60% 50% at 12% 10%, rgba(255,200,61,.18), transparent 60%),
+               linear-gradient(180deg,#fff,#fff7ea);}
+  .peek-wrap{position:relative;margin-top:2.6rem;}
+  .peek-track{display:flex;gap:1.2rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;
+    padding:.6rem .2rem 1.4rem;-webkit-overflow-scrolling:touch;}
+  .peek-track::-webkit-scrollbar{height:8px;}
+  .peek-track::-webkit-scrollbar-thumb{background:rgba(11,30,91,.25);border-radius:99px;}
+  .peek-track::-webkit-scrollbar-track{background:rgba(11,30,91,.07);border-radius:99px;}
+  .peek-slide{flex:0 0 min(440px,82%);scroll-snap-align:center;background:#fff;border-radius:18px;
+    box-shadow:var(--shadow);overflow:hidden;margin:0;transition:transform .25s ease;}
+  .peek-slide:hover{transform:translateY(-6px);}
+  .peek-slide img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block;background:#f3f5fb;}
+  .peek-slide .cap{padding:.7rem 1rem;font-family:'Baloo 2';font-weight:700;color:var(--navy);text-align:center;font-size:.95rem;}
+  .peek-btn{position:absolute;top:calc(50% - 1.2rem);transform:translateY(-50%);z-index:4;
+    width:48px;height:48px;border-radius:50%;border:0;cursor:pointer;background:var(--coral);color:#fff;
+    font-size:1.6rem;line-height:1;box-shadow:var(--shadow);transition:transform .2s, filter .2s;display:flex;align-items:center;justify-content:center;}
+  .peek-btn:hover{transform:translateY(-50%) scale(1.08);filter:brightness(1.05);}
+  .peek-btn.prev{left:-6px;} .peek-btn.next{right:-6px;}
+  @media(max-width:560px){.peek-btn{width:40px;height:40px;font-size:1.3rem;}.peek-btn.prev{left:0;}.peek-btn.next{right:0;}}
+  .peek-hint{text-align:center;color:var(--ink-soft);font-size:.85rem;margin-top:.2rem;}
+
+  /* ---------- WHY ---------- */
+  .why{position:relative;overflow:hidden;
+    background:
+      radial-gradient(60% 50% at 85% 12%, rgba(28,160,227,.14), transparent 60%),
+      radial-gradient(55% 45% at 8% 90%, rgba(255,122,26,.14), transparent 60%),
+      linear-gradient(180deg,#eafaf0,#fff);}
+  .why::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.5;
+    background-image:radial-gradient(rgba(31,138,59,.10) 1.6px, transparent 1.6px);background-size:24px 24px;}
+  .why .wrap{position:relative;z-index:1;}
+  .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.6rem;margin-top:2.6rem;}
+  .why-card{background:#fff;border-radius:var(--r-md);padding:2rem 1.5rem 1.7rem;box-shadow:var(--shadow-sm);text-align:center;
+    transition:transform .25s ease, box-shadow .25s ease;border-top:6px solid var(--green);position:relative;overflow:hidden;}
+  .why-card::after{content:"";position:absolute;top:-40px;right:-40px;width:90px;height:90px;border-radius:50%;
+    background:currentColor;opacity:.08;}
+  .why-card:hover{transform:translateY(-10px) rotate(-.5deg);box-shadow:0 26px 44px -22px rgba(11,30,91,.35);}
+  .why-card:nth-child(1){color:var(--coral);border-top-color:var(--coral);}
+  .why-card:nth-child(2){color:var(--ocean);border-top-color:var(--ocean);}
+  .why-card:nth-child(3){color:var(--green);border-top-color:var(--green);}
+  .why-card:nth-child(4){color:var(--gold);border-top-color:var(--gold);}
+  .why-card .ico{font-size:2.8rem;margin-bottom:.5rem;display:inline-block;animation:floaticon 4s ease-in-out infinite;}
+  .why-card:nth-child(2) .ico{animation-delay:.5s;}
+  .why-card:nth-child(3) .ico{animation-delay:1s;}
+  .why-card:nth-child(4) .ico{animation-delay:1.5s;}
+  .why-card:hover .ico{animation:wiggle .6s ease;}
+  @keyframes floaticon{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
+  @keyframes wiggle{0%,100%{transform:rotate(0) scale(1.15);}25%{transform:rotate(-12deg) scale(1.15);}75%{transform:rotate(12deg) scale(1.15);}}
+  .why-card h3{color:var(--navy);font-size:1.2rem;margin-bottom:.4rem;}
+  .why-card p{color:var(--ink-soft);font-size:.95rem;margin:0;}
+
+  /* ---------- BUNDLE ---------- */
+  .bundle{background:
+      radial-gradient(120% 80% at 10% 0%, rgba(28,160,227,.25), transparent 55%),
+      linear-gradient(160deg,var(--navy),#10309a);
+    color:#fff;border-radius:var(--r-lg);padding:clamp(2rem,5vw,3.5rem);box-shadow:var(--shadow);
+    display:grid;grid-template-columns:1.1fr .9fr;gap:2.5rem;align-items:center;position:relative;overflow:visible;}
+  @media(max-width:780px){.bundle{grid-template-columns:1fr;text-align:center;}}
+  .bundle h2{color:#fff;font-size:clamp(1.8rem,4.5vw,2.8rem);}
+  .bundle .price{font-family:'Baloo 2';font-weight:800;font-size:clamp(2.6rem,7vw,4rem);color:var(--sun);line-height:1;margin:.6rem 0;}
+  .bundle .price small{font-size:.32em;color:#cfe0ff;font-weight:600;display:block;}
+  .bundle ul{list-style:none;padding:0;margin:1.2rem 0;display:grid;gap:.6rem;}
+  .bundle li{display:flex;gap:.6rem;align-items:flex-start;font-size:1.05rem;}
+  @media(max-width:780px){.bundle li{justify-content:center;}}
+  .bundle li::before{content:"✓";color:var(--sun);font-weight:800;flex:none;}
+  .bundle-books{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;}
+  .bundle-books .mini{aspect-ratio:1/1.3;border-radius:12px;display:flex;align-items:center;justify-content:center;
+    font-size:2rem;box-shadow:var(--shadow-sm);animation:bob 6s ease-in-out infinite;}
+  .bundle-books .mini:nth-child(2){animation-delay:.6s;}
+  .bundle-books .mini:nth-child(3){animation-delay:1.2s;}
+  .bundle-books .mini:nth-child(4){animation-delay:1.8s;}
+  .bundle-books .mini img{width:100%;height:100%;object-fit:cover;border-radius:12px;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:2.5rem;align-items:center;}
+  @media(max-width:780px){.about-grid{grid-template-columns:1fr;}}
+  .about-photo{aspect-ratio:1/1;border-radius:var(--r-lg);background:
+      repeating-linear-gradient(45deg,#eef3ff,#eef3ff 14px,#e3ebff 14px,#e3ebff 28px);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--ink-soft);
+    box-shadow:var(--shadow-sm);text-align:center;gap:.5rem;font-weight:700;}
+  .about-photo .ph-ico{font-size:3rem;}
+  .about p{color:var(--ink-soft);font-size:1.08rem;}
+
+  /* ---------- REVIEWS ---------- */
+  .reviews{background:linear-gradient(180deg,#fff,#fff6e6);}
+  .review-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.6rem;margin-top:2.6rem;}
+  .review{background:#fff;border-radius:var(--r-md);padding:1.8rem;box-shadow:var(--shadow-sm);position:relative;}
+  .review .stars{color:var(--gold);font-size:1.1rem;letter-spacing:.1em;margin-bottom:.6rem;}
+  .review p{font-size:1.02rem;color:var(--ink);font-style:italic;margin:0 0 1rem;}
+  .review .who{font-weight:800;color:var(--navy);font-size:.95rem;}
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  .contact{position:relative;overflow:hidden;color:#fff;
+    background:linear-gradient(160deg,#27a14a 0%, #1f8a3b 65%, #167431 100%);}
+  /* layered texture: dots + soft palm-leaf vibe so the green isn't flat */
+  .contact::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.55;
+    background-image:radial-gradient(rgba(255,255,255,.12) 2px, transparent 2px);background-size:30px 30px;}
+  .contact::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.10;
+    background-image:repeating-linear-gradient(135deg, #fff 0 2px, transparent 2px 16px);}
+  .contact .wrap{position:relative;z-index:1;}
+  .contact .section-title,.contact .section-sub{color:#fff;}
+  .contact .section-sub{opacity:.95;}
+  /* primary WhatsApp call-to-action */
+  .contact-actions{display:flex;justify-content:center;margin:2.4rem 0 2.2rem;}
+  .wa-btn{--bg:#25D366;--fg:#0a3d1e;font-size:1.18rem;padding:1em 2em;box-shadow:0 14px 30px -12px rgba(0,0,0,.4);}
+  .wa-btn svg{width:24px;height:24px;fill:currentColor;flex:none;}
+  /* compact, content-sized info cards, centered */
+  .contact-cards{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;}
+  .contact-card{flex:0 1 240px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:.35rem;
+    background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:16px;
+    padding:1.1rem 1.2rem;backdrop-filter:blur(4px);transition:transform .2s ease, background .2s ease;}
+  .contact-card:hover{transform:translateY(-5px);background:rgba(255,255,255,.22);}
+  .contact-card .ico{font-size:1.6rem;line-height:1;}
+  .contact-card h3{font-size:1rem;margin:0;}
+  .contact-card a,.contact-card p{color:#fff;text-decoration:none;font-weight:600;opacity:.95;margin:0;font-size:.92rem;word-break:break-word;}
+  .contact-card a:hover{text-decoration:underline;}
+  .social-chip{display:inline-flex;align-items:center;gap:.45rem;text-decoration:none;color:#fff;font-weight:700;
+    font-size:.86rem;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
+    padding:.45em .9em;border-radius:999px;transition:transform .2s,background .2s;margin-top:.15rem;}
+  .social-chip:hover{transform:translateY(-3px);background:rgba(255,255,255,.3);}
+  .social-chip svg{width:16px;height:16px;fill:#fff;flex:none;}
+
+  footer{background:var(--navy);color:#cfd8f5;padding:2rem 0;text-align:center;font-size:.9rem;}
+  footer a{color:var(--sun);text-decoration:none;}
+
+  /* ---------- scroll reveal ---------- */
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.3,1);}
+  .reveal.in{opacity:1;transform:none;}
+  .reveal.d1{transition-delay:.08s;} .reveal.d2{transition-delay:.16s;}
+  .reveal.d3{transition-delay:.24s;} .reveal.d4{transition-delay:.32s;}
+
+  /* back to top */
+  #toTop{position:fixed;right:20px;bottom:20px;width:52px;height:52px;border-radius:50%;border:0;cursor:pointer;
+    background:var(--coral);color:#fff;font-size:1.4rem;box-shadow:var(--shadow);opacity:0;pointer-events:none;
+    transition:opacity .3s, transform .3s;z-index:40;}
+  #toTop.show{opacity:1;pointer-events:auto;}
+  #toTop:hover{transform:translateY(-4px);}
+
+  /* ---------- small-screen / mobile polish ---------- */
+  @media(max-width:560px){
+    .hero{padding-top:7rem;}
+    .hero-grid{gap:1.4rem;}
+    .hero .lead{font-size:1.05rem;}
+    .hero-cta{gap:.7rem;}
+    .hero-cta .btn{flex:1 1 100%;justify-content:center;}
+    .btn--lg{font-size:1.05rem;padding:.9em 1.3em;}
+    .hero-badges{gap:.7rem;}
+    .hero-badge{font-size:.82rem;}
+    .logo-img{width:78%;}
+    .section{padding:3rem 0;}
+    .section-title{font-size:1.85rem;}
+    .brand{font-size:1.05rem;}
+    .brand .mark{width:36px;height:36px;}
+    .bundle{padding:1.5rem;}
+    .bundle-books{gap:.7rem;}
+    .why-card,.contact-card{flex-basis:100%;}
+    .contact-card{max-width:360px;}
+    .wa-btn{width:100%;justify-content:center;}
+    .peek-slide{flex-basis:88%;}
+    .peek-hint{font-size:.8rem;}
+  }
+  /* never allow sideways scroll on phones */
+  @media(max-width:560px){html,body{max-width:100%;overflow-x:hidden;}}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;}
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand" aria-label="Caribbean for Kids home">
+      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="30" fill="#0B1E5B"/>
+        <circle cx="32" cy="26" r="16" fill="#FFC83D"/>
+        <path d="M14 46c6-8 30-8 36 0z" fill="#2EA84F"/>
+        <text x="32" y="33" font-size="18" text-anchor="middle" fill="#0B1E5B" font-family="Baloo 2, sans-serif" font-weight="800">C</text>
+      </svg>
+      Caribbean for Kids
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#books">Books</a>
+      <a href="#peek">Peek Inside</a>
+      <a href="#why">Why Us</a>
+      <a href="#bundle">Bundle</a>
+      <a href="#about">About</a>
+      <a href="#contact" class="btn btn--coral">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <svg class="sun-rays" viewBox="0 0 200 200" aria-hidden="true">
+    <g id="rays" fill="#ffffff" opacity=".5"></g>
+  </svg>
+
+  <span class="floaty f-palm" style="top:12%;left:3.5%;animation-delay:0s">🌴</span>
+  <span class="floaty f-bird" style="top:9%;right:3.5%;animation-delay:1.5s">🦜</span>
+  <span class="floaty f-mango" style="bottom:7%;left:5%;animation-delay:.8s">🥭</span>
+  <span class="floaty f-dino" style="bottom:5%;right:5%;animation-delay:2.2s">🦕</span>
+
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">Fun • Educational • Caribbean-Inspired</span>
+      <h1>The Caribbean, <span class="pop">colour&nbsp;by&nbsp;colour.</span></h1>
+      <p class="lead" id="cms-lead">Vibrant activity &amp; colouring books that turn island flags, birds, fruits and dinosaurs into hours of learning and creative play — made for curious kids ages 3–10.</p>
+      <div class="hero-cta">
+        <a href="#books" class="btn btn--coral btn--lg">Explore the books</a>
+        <a href="#bundle" class="btn btn--sun btn--lg">See the 4-book bundle</a>
+      </div>
+      <div class="hero-badges">
+        <span class="hero-badge">⭐ Loved by parents &amp; teachers</span>
+        <span class="hero-badge">📦 Available on Amazon</span>
+        <span class="hero-badge">🇹🇹 Made in the Caribbean</span>
+      </div>
+    </div>
+
+    <div class="hero-art">
+      <img class="logo-img" src="assets/logo.jpg" width="1100" height="855"
+           alt="Caribbean for Kids — two children reading a book together under palm trees">
+    </div>
+  </div>
+
+  <svg class="wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;bottom:0;left:0">
+    <path d="M0,40 C240,90 480,0 720,30 C960,60 1200,90 1440,40 L1440,90 L0,90 Z" fill="#FFFDF5"/>
+  </svg>
+</section>
+
+<!-- ============ TICKER ============ -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="ticker">
+    <span>🦜 28 Caribbean nations &amp; territories</span><span>🎨 Pages and pages to colour</span><span>🧩 Word puzzles &amp; mazes</span><span>🦕 Dinosaurs on the beach</span><span>🥭 Tropical fruit fun facts</span><span>🚩 Flags from across the islands</span>
+  </div>
+</div>
+
+<!-- ============ BOOKS ============ -->
+<section class="section" id="books">
+  <div class="wrap">
+    <div class="center" style="max-width:640px;">
+      <span class="eyebrow reveal">The Collection</span>
+      <h2 class="section-title reveal">Four books, one big adventure</h2>
+      <p class="section-sub center reveal">Each book blends colouring, puzzles and real facts about the region — so kids create <em>and</em> learn.</p>
+    </div>
+
+    <div class="books-grid">
+      <!-- FLAGS -->
+      <article class="book-card reveal d1">
+        <div class="cover">
+          <img class="cover-photo" src="assets/cover-flags.jpg" loading="lazy"
+               alt="National Flags of the Caribbean — children's colouring book cover">
+        </div>
+        <h3>National Flags of the Caribbean</h3>
+        <p>Colour the flags that tell each island's story, with fun facts about every nation tucked alongside. A bright intro to geography and culture.</p>
+        <div class="tags"><span class="tag">Colouring</span><span class="tag">Geography</span><span class="tag">Fun facts</span></div>
+        <a href="https://www.amazon.com/dp/B0CVBCLGQ1" id="cms-amz-flags" class="btn btn--green buy" target="_blank" rel="noopener" data-amazon>Buy on Amazon</a>
+      </article>
+
+      <!-- DINOS -->
+      <article class="book-card reveal d2">
+        <div class="cover">
+          <img class="cover-photo" src="assets/cover-dinos.jpg" loading="lazy"
+               alt="Dinos in the Caribbean — kids dinosaur activity book cover">
+        </div>
+        <h3>Dinos in the Caribbean</h3>
+        <p>A T-Rex on the beach, a Triceratops in the rainforest. Coloring, riddles, word searches and crosswords meet prehistoric island fun.</p>
+        <div class="tags"><span class="tag">Colouring</span><span class="tag">Puzzles</span><span class="tag">Riddles</span></div>
+        <a href="https://www.amazon.com/dp/B0CSYLJKFS" id="cms-amz-dinos" class="btn btn--green buy" target="_blank" rel="noopener" data-amazon>Buy on Amazon</a>
+      </article>
+
+      <!-- FRUITS -->
+      <article class="book-card reveal d3">
+        <div class="cover">
+          <img class="cover-photo" src="assets/cover-fruits.jpg" loading="lazy"
+               alt="Fruits of the Caribbean — colouring book cover">
+        </div>
+        <h3>Fruits of the Caribbean</h3>
+        <p>From succulent mangoes to tangy five-fingers — a juicy adventure of colours, shapes and flavours through the region's most beloved fruits.</p>
+        <div class="tags"><span class="tag">Colouring</span><span class="tag">Puzzles</span><span class="tag">Nature</span></div>
+        <a href="https://www.amazon.com/dp/B0CVTMKWNB" id="cms-amz-fruits" class="btn btn--green buy" target="_blank" rel="noopener" data-amazon>Buy on Amazon</a>
+      </article>
+
+      <!-- BIRDS -->
+      <article class="book-card reveal d4">
+        <div class="cover">
+          <img class="cover-photo" src="assets/cover-birds.jpg" loading="lazy"
+               alt="National Birds of the Caribbean — kids activity book cover">
+        </div>
+        <h3>National Birds of the Caribbean</h3>
+        <p>From the colourful Cuban Trogon to the majestic Scarlet Ibis — stunning illustrations, puzzles and facts that spark a love of nature.</p>
+        <div class="tags"><span class="tag">Colouring</span><span class="tag">Wildlife</span><span class="tag">Fun facts</span></div>
+        <a href="https://www.amazon.com/dp/B0CV91JKKS" id="cms-amz-birds" class="btn btn--green buy" target="_blank" rel="noopener" data-amazon>Buy on Amazon</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PEEK INSIDE ============ -->
+<section class="section peek" id="peek">
+  <div class="wrap">
+    <div class="center" style="max-width:660px;">
+      <span class="eyebrow reveal">Peek inside</span>
+      <h2 class="section-title reveal">See what's on the pages</h2>
+      <p class="section-sub center reveal">Colouring pages, fun facts, word searches, riddles and crosswords — here's a taste of the activities waiting inside.</p>
+    </div>
+    <div class="peek-wrap reveal">
+      <button class="peek-btn prev" id="peekPrev" aria-label="Previous pages">‹</button>
+      <div class="peek-track" id="peekTrack">
+        <!-- balanced + interleaved by book (Dinos · Birds · Flags). Fruits interior pending an image. -->
+        <figure class="peek-slide"><img src="assets/inside-dinos-funfact.jpg" loading="lazy" alt="Inside Dinos in the Caribbean: a fun-fact page beside a dinosaur colouring page"><figcaption class="cap">Dinos in the Caribbean — facts + colouring</figcaption></figure>
+        <figure class="peek-slide"><img src="assets/inside-birds-woodpecker.jpg" loading="lazy" alt="Inside National Birds of the Caribbean: Guadeloupe Woodpecker fun-fact and colouring page"><figcaption class="cap">National Birds — meet &amp; colour each bird</figcaption></figure>
+        <figure class="peek-slide"><img src="assets/inside-flags-dominica.jpg" loading="lazy" alt="Colour-the-flag page for Dominica with fun facts"><figcaption class="cap">National Flags — colour-the-flag + facts</figcaption></figure>
+        <figure class="peek-slide"><img src="assets/inside-crosswords.jpg" loading="lazy" alt="Jurassic crosswords activity spread from the dinosaur book"><figcaption class="cap">Dinos in the Caribbean — Jurassic crosswords</figcaption></figure>
+        <figure class="peek-slide"><img src="assets/inside-birds-wordsearch.jpg" loading="lazy" alt="Caribbean birds word-search puzzles spread"><figcaption class="cap">National Birds — word-search puzzles</figcaption></figure>
+        <figure class="peek-slide"><img src="assets/inside-flags-trinidad.jpg" loading="lazy" alt="Colour-the-flag page for Trinidad &amp; Tobago"><figcaption class="cap">National Flags — every nation to colour</figcaption></figure>
+      </div>
+      <button class="peek-btn next" id="peekNext" aria-label="Next pages">›</button>
+    </div>
+    <p class="peek-hint">← swipe or drag to browse →</p>
+  </div>
+</section>
+
+<!-- ============ WHY ============ -->
+<section class="section why" id="why">
+  <div class="wrap">
+    <div class="center" style="max-width:620px;">
+      <span class="eyebrow reveal">Parents love them · kids ask for them</span>
+      <h2 class="section-title reveal">Screen-free learning, island style</h2>
+      <p class="section-sub center reveal">Grown-ups get the educational value; little ones just think they're having fun. Everybody wins.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal d1"><div class="ico">🎨</div><h3>Create &amp; colour</h3><p>Activity-packed pages that build focus, fine motor skills and a whole lot of pride.</p></div>
+      <div class="why-card reveal d2"><div class="ico">🧠</div><h3>Sneaky learning</h3><p>Real facts about flags, birds, fruits and dinos — geography and nature without the homework feeling.</p></div>
+      <div class="why-card reveal d3"><div class="ico">🌴</div><h3>Proudly Caribbean</h3><p>Kids see their region celebrated — a meaningful gift for home, classroom or homeschooling.</p></div>
+      <div class="why-card reveal d4"><div class="ico">🎁</div><h3>Gift-ready</h3><p>Perfect for birthdays and holidays. The bundle even comes with coloured pencils.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BUNDLE ============ -->
+<section class="section" id="bundle">
+  <div class="wrap">
+    <div class="bundle reveal">
+      <div>
+        <span class="eyebrow" style="background:rgba(255,200,61,.2);color:var(--sun);">Best value</span>
+        <h2>The 4-Book Bundle</h2>
+        <p style="opacity:.9;max-width:42ch;">All four activity books in one fun, educational gift from the Caribbean — designed to keep kids engaged while they learn.</p>
+        <div class="price"><span id="cms-price">US$29</span><small>Special bundle price · all 4 books + pencils</small></div>
+        <ul>
+          <li>All 4 activity &amp; colouring books</li>
+          <li>Colouring activities &amp; word puzzles</li>
+          <li>Fun trivia on every page</li>
+          <li>Bonus 12-pack of coloured pencils</li>
+        </ul>
+        <a href="#contact" class="btn btn--sun btn--lg">Order the bundle</a>
+      </div>
+      <div class="bundle-books" aria-hidden="true">
+        <div class="mini"><img src="assets/cover-flags.jpg" alt=""></div>
+        <div class="mini"><img src="assets/cover-dinos.jpg" alt=""></div>
+        <div class="mini"><img src="assets/cover-fruits.jpg" alt=""></div>
+        <div class="mini"><img src="assets/cover-birds.jpg" alt=""></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="section about" id="about">
+  <div class="wrap about-grid">
+    <div class="about-photo ph reveal">
+      <span class="ph-ico">📸</span>
+      <span>A friendly photo of the<br>founder goes here</span>
+    </div>
+    <div class="reveal d1">
+      <span class="eyebrow">Our story</span>
+      <h2 class="section-title">Made by Caribbean people, for Caribbean kids</h2>
+      <p>Caribbean for Kids began with a simple idea: children deserve learning materials that look like home. What started as one colouring book has grown into a series that celebrates the flags, wildlife, flavours and wonder of the islands — all designed to make kids excited to learn.</p>
+      <p>Every book is crafted to be fun first and educational always, so curiosity grows page after page. <strong>[We'll drop in the founder's real bio &amp; mission once Jamal sends it.]</strong></p>
+      <a href="#contact" class="btn btn--green">Work with us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section class="section reviews" id="reviews">
+  <div class="wrap">
+    <div class="center" style="max-width:620px;">
+      <span class="eyebrow reveal">Kind words</span>
+      <h2 class="section-title reveal">What parents &amp; teachers say</h2>
+      <p class="section-sub center reveal">Real stories from the families and classrooms who've made these books part of their day.</p>
+    </div>
+    <div class="review-grid">
+      <div class="review reveal d1"><div class="stars">★★★★★</div><p>"My daughter learned every Caribbean flag without realising she was studying. Beautiful, sturdy pages too."</p><div class="who">— Sample Parent Review</div></div>
+      <div class="review reveal d2"><div class="stars">★★★★★</div><p>"I use these in my Grade 1 class for culture lessons. The kids fight over who gets the dinosaur book!"</p><div class="who">— Sample Teacher Review</div></div>
+      <div class="review reveal d3"><div class="stars">★★★★★</div><p>"Finally, activity books that celebrate where we're from. Bought the bundle for all three of my kids."</p><div class="who">— Sample Parent Review</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section contact" id="contact">
+  <div class="wrap">
+    <div class="center" style="max-width:620px;">
+      <span class="eyebrow reveal" style="background:rgba(255,255,255,.18);color:#fff;">Get in touch</span>
+      <h2 class="section-title reveal">Let's get the books to your little ones</h2>
+      <p class="section-sub center reveal">Order the bundle, stock your store, or just say hello.</p>
+    </div>
+    <!-- primary action: open WhatsApp chat -->
+    <div class="contact-actions reveal">
+      <a class="btn wa-btn" id="cms-whatsapp" href="https://wa.me/18684665437?text=Hi%20Caribbean%20for%20Kids!%20I%27d%20like%20to%20ask%20about%20your%20books." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M.06 24l1.68-6.16a11.87 11.87 0 01-1.6-5.95C.14 5.34 5.5 0 12.06 0a11.82 11.82 0 018.42 3.49 11.82 11.82 0 013.48 8.41c0 6.56-5.35 11.9-11.9 11.9a11.9 11.9 0 01-5.7-1.45L.06 24zM6.6 20.13c1.68 1 3.28 1.6 5.4 1.6 5.44 0 9.88-4.43 9.88-9.88 0-5.46-4.44-9.9-9.9-9.9S2.1 6.49 2.1 11.95a9.82 9.82 0 001.52 5.25l-.99 3.61 3.97-1.04zm11.39-5.66c-.07-.12-.27-.2-.57-.35-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.88 1.21 3.08.15.2 2.09 3.2 5.07 4.48.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.69.25-1.28.17-1.41z"/></svg>
+        Message us on WhatsApp
+      </a>
+    </div>
+
+    <!-- compact info cards -->
+    <div class="contact-cards">
+      <div class="contact-card reveal d1"><div class="ico">📞</div><h3>Call us</h3><a href="tel:+18684665437" id="cms-phone">1-868-466-KIDS (5437)</a></div>
+      <div class="contact-card reveal d2"><div class="ico">✉️</div><h3>Email</h3><a href="mailto:hello@caribbeanforkids.com" id="cms-email">hello@caribbeanforkids.com</a></div>
+      <div class="contact-card reveal d3"><div class="ico">📍</div><h3>Visit us</h3><p id="cms-address">Trini Smart Driver,<br>Heartland Plaza, Endeavour</p></div>
+      <div class="contact-card reveal d4"><div class="ico">💛</div><h3>Follow us</h3>
+        <a class="social-chip" id="cms-instagram" href="https://instagram.com/caribbeanforkids" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 01-1.38-.9 3.7 3.7 0 01-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2zm0 1.8c-3.15 0-3.5.01-4.74.07-.9.04-1.38.19-1.7.32-.43.16-.74.36-1.06.68-.32.32-.52.63-.68 1.06-.13.32-.28.8-.32 1.7C3.21 8.5 3.2 8.85 3.2 12s.01 3.5.07 4.74c.04.9.19 1.38.32 1.7.16.43.36.74.68 1.06.32.32.63.52 1.06.68.32.13.8.28 1.7.32 1.24.06 1.59.07 4.74.07s3.5-.01 4.74-.07c.9-.04 1.38-.19 1.7-.32.43-.16.74-.36 1.06-.68.32-.32.52-.63.68-1.06.13-.32.28-.8.32-1.7.06-1.24.07-1.59.07-4.74s-.01-3.5-.07-4.74c-.04-.9-.19-1.38-.32-1.7a2.85 2.85 0 00-.68-1.06 2.85 2.85 0 00-1.06-.68c-.32-.13-.8-.28-1.7-.32C15.5 4.01 15.15 4 12 4zm0 3.06A4.94 4.94 0 1012 17a4.94 4.94 0 000-9.88zm0 8.14A3.2 3.2 0 1112 8.8a3.2 3.2 0 010 6.4zm6.3-8.34a1.15 1.15 0 11-2.3 0 1.15 1.15 0 012.3 0z"/></svg>@caribbeanforkids</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p style="font-family:'Baloo 2';font-size:1.2rem;color:#fff;margin-bottom:.3rem">Caribbean for Kids 🌴</p>
+    <p>Fun • Educational • Caribbean-Inspired · Activity books for ages 3–10</p>
+    <p style="margin-top:.6rem">© <span id="year"></span> Caribbean for Kids. Available on <a href="#">Amazon</a> · <a href="#contact">caribbeanforkids.com</a></p>
+  </div>
+</footer>
+
+<button id="toTop" aria-label="Back to top">↑</button>
+
+<script>
+  // generate sun rays
+  (function(){
+    const g=document.getElementById('rays');if(!g)return;
+    let s='';for(let i=0;i<24;i++){const a=i*15;s+=`<rect x="98" y="0" width="4" height="42" rx="2" transform="rotate(${a} 100 100)"/>`;}
+    g.innerHTML=s;
+  })();
+
+  // year
+  document.getElementById('year').textContent=new Date().getFullYear();
+
+  // nav scroll state
+  const nav=document.getElementById('nav');
+  const toTop=document.getElementById('toTop');
+  window.addEventListener('scroll',()=>{
+    const y=window.scrollY;
+    nav.classList.toggle('scrolled',y>30);
+    toTop.classList.toggle('show',y>600);
+  });
+  toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+  // mobile menu
+  const burger=document.getElementById('hamburger');
+  const links=document.getElementById('navLinks');
+  burger.addEventListener('click',()=>{
+    const open=links.classList.toggle('open');
+    burger.setAttribute('aria-expanded',open);
+  });
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    links.classList.remove('open');burger.setAttribute('aria-expanded',false);
+  }));
+
+  // duplicate ticker content for seamless loop
+  const tk=document.getElementById('ticker');
+  if(tk){tk.innerHTML+=tk.innerHTML;}
+
+  // scroll reveal
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // subtle 3D tilt on book cards
+  document.querySelectorAll('.book-card').forEach(card=>{
+    card.addEventListener('mousemove',e=>{
+      const r=card.getBoundingClientRect();
+      const x=(e.clientX-r.left)/r.width-.5;
+      const y=(e.clientY-r.top)/r.height-.5;
+      card.style.transform=`perspective(800px) rotateY(${x*6}deg) rotateX(${-y*6}deg) translateY(-6px)`;
+    });
+    card.addEventListener('mouseleave',()=>{card.style.transform='';});
+  });
+
+  // peek-inside slider arrows
+  (function(){
+    const track=document.getElementById('peekTrack');
+    const prev=document.getElementById('peekPrev');
+    const next=document.getElementById('peekNext');
+    if(!track||!prev||!next)return;
+    const step=()=>{const s=track.querySelector('.peek-slide');return s?s.getBoundingClientRect().width+20:360;};
+    next.addEventListener('click',()=>track.scrollBy({left:step(),behavior:'smooth'}));
+    prev.addEventListener('click',()=>track.scrollBy({left:-step(),behavior:'smooth'}));
+  })();
+
+  // ----- Editable content (Pages CMS) -----
+  // Loads content.json and overrides the editable fields. If the file is missing
+  // (e.g. opening the page locally), the baked-in defaults above are kept. No build step.
+  (function(){
+    fetch('content.json',{cache:'no-store'})
+      .then(function(r){return r.ok?r.json():null;})
+      .then(function(c){
+        if(!c)return;
+        var txt=function(id,v){var el=document.getElementById(id); if(el&&v!=null&&v!=='') el.textContent=v;};
+        var href=function(id,v){var el=document.getElementById(id); if(el&&v!=null&&v!=='') el.setAttribute('href',v);};
+        txt('cms-lead', c.heroLead);
+        txt('cms-price', c.bundlePrice);
+        href('cms-amz-flags', c.amazonFlags);
+        href('cms-amz-dinos', c.amazonDinos);
+        href('cms-amz-fruits', c.amazonFruits);
+        href('cms-amz-birds', c.amazonBirds);
+        href('cms-instagram', c.instagramUrl);
+        txt('cms-address', c.address);
+        if(c.whatsappNumber){
+          var w=document.getElementById('cms-whatsapp');
+          if(w) w.setAttribute('href','https://wa.me/'+c.whatsappNumber+'?text=Hi%20Caribbean%20for%20Kids!%20I%27d%20like%20to%20ask%20about%20your%20books.');
+        }
+        if(c.phoneDisplay){
+          var p=document.getElementById('cms-phone');
+          if(p){p.textContent=c.phoneDisplay; if(c.whatsappNumber) p.setAttribute('href','tel:+'+c.whatsappNumber);}
+        }
+        if(c.email){
+          var e=document.getElementById('cms-email');
+          if(e){e.textContent=c.email; e.setAttribute('href','mailto:'+c.email);}
+        }
+      })
+      .catch(function(){});
+  })();
+</script>
+</body>
+</html>

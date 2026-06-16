@@ -12,8 +12,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:image" content="assets/social-preview.jpg" />
 
-<!-- Favicon (matches the header mark) -->
-<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+<!-- Favicon (the Caribbean for Kids logo) -->
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 
@@ -99,7 +98,7 @@
   header.nav.scrolled{background:rgba(255,253,245,.92);backdrop-filter:blur(10px);box-shadow:0 6px 20px -16px rgba(11,30,91,.6);padding:.5rem 0;}
   .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;}
   .brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;font-family:'Baloo 2';font-weight:800;color:var(--navy);font-size:1.25rem;}
-  .brand .mark{width:42px;height:42px;flex:none;}
+  .brand .mark{width:auto;height:46px;flex:none;}
   .nav-links{display:flex;align-items:center;gap:1.6rem;}
   .nav-links a{font-family:'Baloo 2';font-weight:600;color:var(--navy);text-decoration:none;font-size:1.02rem;position:relative;}
   .nav-links a:not(.btn)::after{content:"";position:absolute;left:0;bottom:-4px;height:3px;width:0;background:var(--coral);border-radius:3px;transition:width .25s ease;}
@@ -443,12 +442,7 @@
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
     <a href="#top" class="brand" aria-label="Caribbean for Kids home">
-      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
-        <circle cx="32" cy="32" r="30" fill="#0B1E5B"/>
-        <circle cx="32" cy="26" r="16" fill="#FFC83D"/>
-        <path d="M14 46c6-8 30-8 36 0z" fill="#2EA84F"/>
-        <text x="32" y="33" font-size="18" text-anchor="middle" fill="#0B1E5B" font-family="Baloo 2, sans-serif" font-weight="800">C</text>
-      </svg>
+      <img class="mark" src="assets/logo-mark.png" alt="Caribbean for Kids logo" />
       Caribbean for Kids
     </a>
     <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
@@ -623,14 +617,15 @@
         <span class="eyebrow" style="background:rgba(255,200,61,.2);color:var(--sun);">Best value</span>
         <h2 id="cms-bundle-heading">The 4-Book Bundle</h2>
         <p style="opacity:.9;max-width:42ch;" id="cms-bundle-blurb">All four activity books in one fun, educational gift from the Caribbean — designed to keep kids engaged while they learn.</p>
-        <div class="price"><span id="cms-price">US$29</span><small id="cms-price-note">Special bundle price · all 4 books + pencils</small></div>
+        <div class="price"><span id="cms-price">TT$200</span><small id="cms-price-note">≈ US$30 · all 4 books + coloured pencils</small></div>
         <ul id="bundle-list">
           <li>All 4 activity &amp; colouring books</li>
           <li>Colouring activities &amp; word puzzles</li>
           <li>Fun trivia on every page</li>
           <li>Bonus 12-pack of coloured pencils</li>
+          <li>Nationwide delivery available (+TT$40)</li>
         </ul>
-        <a href="#contact" class="btn btn--sun btn--lg">Order the bundle</a>
+        <a href="https://wa.me/18684665437?text=Hi%21%20I%27d%20like%20to%20order%20the%20Caribbean%20for%20Kids%204-book%20bundle%20%28TT%24200%20%2F%20US%2430%29." class="btn btn--sun btn--lg" target="_blank" rel="noopener">Order on WhatsApp</a>
       </div>
       <div class="bundle-books" id="bundle-books" aria-hidden="true">
         <div class="mini"><img src="assets/cover-flags.jpg" alt=""></div>
@@ -644,18 +639,17 @@
 
 <!-- ============ ABOUT ============ -->
 <section class="section about" id="about">
-  <div class="wrap about-grid">
-    <div class="about-photo ph reveal" id="cms-about-photo">
-      <span class="ph-ico">📸</span>
-      <span>A friendly photo of the<br>founder goes here</span>
+  <div class="wrap" style="max-width:800px;">
+    <div class="center" style="margin-bottom:1.6rem;">
+      <span class="eyebrow reveal">Our story</span>
+      <h2 class="section-title reveal">About Caribbean for Kids</h2>
     </div>
-    <div class="reveal d1">
-      <span class="eyebrow">Our story</span>
-      <h2 class="section-title" id="cms-about-heading">Made by Caribbean people, for Caribbean kids</h2>
-      <p id="cms-about-body1">Caribbean for Kids began with a simple idea: children deserve learning materials that look like home. What started as one colouring book has grown into a series that celebrates the flags, wildlife, flavours and wonder of the islands — all designed to make kids excited to learn.</p>
-      <p id="cms-about-body2">Every book is crafted to be fun first and educational always, so curiosity grows page after page.</p>
-      <a href="#contact" class="btn btn--green">Work with us</a>
-    </div>
+    <p class="reveal">Caribbean for Kids is a creative publishing company dedicated to celebrating the rich culture, history, and vibrant spirit of the Caribbean through engaging activity books designed especially for toddlers and young children.</p>
+    <p class="reveal">Our mission is to help children discover and embrace Caribbean identity through play, imagination, and learning. We create beautifully illustrated, Caribbean-themed activity books that introduce young minds to many aspects of the region — flags, fruits, capitals and more.</p>
+    <p class="reveal">Designed primarily for children of the Caribbean and the global Caribbean diaspora, our books also resonate with families across the world who are curious about the region and its many cultures.</p>
+    <p class="reveal">Each book features captivating illustrations for children to colour, encouraging creativity and fine motor development. Beyond colouring, our activity books include age-appropriate fun facts, puzzles, trivia, and interactive learning activities that inspire curiosity and foster a love of discovery.</p>
+    <p class="reveal" style="font-family:'Baloo 2';font-weight:800;color:var(--navy);font-size:clamp(1.2rem,2.6vw,1.55rem);text-align:center;margin-top:1.6rem;">Caribbean for Kids — Discover the Caribbean through Play.</p>
+    <div class="center" style="margin-top:1.4rem;"><a href="#contact" class="btn btn--green reveal">Get in touch</a></div>
   </div>
 </section>
 
@@ -668,9 +662,9 @@
       <p class="section-sub center reveal">Real stories from the families and classrooms who've made these books part of their day.</p>
     </div>
     <div class="review-grid" id="review-grid">
-      <div class="review reveal d1"><div class="stars">★★★★★</div><p>"My daughter learned every Caribbean flag without realising she was studying. Beautiful, sturdy pages too."</p><div class="who">— Sample Parent Review</div></div>
-      <div class="review reveal d2"><div class="stars">★★★★★</div><p>"I use these in my Grade 1 class for culture lessons. The kids fight over who gets the dinosaur book!"</p><div class="who">— Sample Teacher Review</div></div>
-      <div class="review reveal d3"><div class="stars">★★★★★</div><p>"Finally, activity books that celebrate where we're from. Bought the bundle for all three of my kids."</p><div class="who">— Sample Parent Review</div></div>
+      <div class="review reveal d1"><div class="stars">★★★★★</div><p>"My three-year-old asks for her 'Caribbean book' every evening. She's learned our flag and half the islands' colours without realising she's learning — and the pages actually hold up to a toddler. Beautiful work."</p><div class="who">— Melissa Dolly, Arima</div></div>
+      <div class="review reveal d2"><div class="stars">★★★★★</div><p>"I got the bundle for my two and it's the first thing they reach for instead of a screen. The fruits and birds books sparked so many questions about home. Worth every cent."</p><div class="who">— Sherain Demming, San Fernando</div></div>
+      <div class="review reveal d3"><div class="stars">★★★★★</div><p>"Raising my kids in New York, these books are how they stay connected to where we're from. Colouring the flags and reading the fun facts has them proud of their Caribbean roots — a wonderful gift from home."</p><div class="who">— Randy Romain, New York</div></div>
     </div>
   </div>
 </section>
@@ -782,65 +776,6 @@
     prev.addEventListener('click',()=>track.scrollBy({left:-step(),behavior:'smooth'}));
   })();
 
-  // ===== Editable content (Pages CMS) =====
-  // The page ships with full default content baked into the HTML above, so it always
-  // works (even opened locally or if content.json is missing). When content.json loads,
-  // the editable sections below are re-rendered from it. Edited via app.pagescms.org.
-  (function(){
-    function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-    function at(s){return String(s==null?'':s).replace(/"/g,'&quot;');}
-    function el(id){return document.getElementById(id);}
-    function setText(id,v){var e=el(id); if(e&&v!=null&&v!=='') e.textContent=v;}
-    function setHTML(id,h){var e=el(id); if(e&&h!=null) e.innerHTML=h;}
-    function setSrc(id,v){var e=el(id); if(e&&v) e.setAttribute('src',v);}
-    function setHref(id,v){var e=el(id); if(e&&v) e.setAttribute('href',v);}
-
-    function tagsHTML(t){return String(t||'').split(',').map(function(x){return x.trim();}).filter(Boolean)
-      .map(function(x){return '<span class="tag">'+esc(x)+'</span>';}).join('');}
-    function bookCard(b){return '<article class="book-card">'
-      +'<div class="cover"><img class="cover-photo" loading="lazy" src="'+at(b.cover)+'" alt="'+at(b.title)+'"></div>'
-      +'<h3>'+esc(b.title)+'</h3><p>'+esc(b.description)+'</p>'
-      +'<div class="tags">'+tagsHTML(b.tags)+'</div>'
-      +(b.amazon?'<a href="'+at(b.amazon)+'" class="btn btn--green buy" target="_blank" rel="noopener">Buy on Amazon</a>':'')
-      +'</article>';}
-    function bundleThumb(b){return '<div class="mini"><img src="'+at(b.cover)+'" alt=""></div>';}
-    function peekSlide(p){return '<figure class="peek-slide"><img loading="lazy" src="'+at(p.image)+'" alt="'+at(p.caption)+'"><figcaption class="cap">'+esc(p.caption)+'</figcaption></figure>';}
-    function whyCard(w){return '<div class="why-card"><div class="ico">'+esc(w.icon)+'</div><h3>'+esc(w.title)+'</h3><p>'+esc(w.text)+'</p></div>';}
-    function reviewCard(r){var n=Math.max(0,Math.min(5,parseInt(r.stars,10)||5));return '<div class="review"><div class="stars">'+new Array(n+1).join('★')+'</div><p>'+esc(r.quote)+'</p><div class="who">'+esc(r.author)+'</div></div>';}
-
-    fetch('content.json',{cache:'no-store'})
-      .then(function(r){return r.ok?r.json():null;})
-      .then(function(c){
-        if(!c)return;
-        try{ if(c.hero){ setText('cms-hero-eyebrow',c.hero.eyebrow);
-          if(c.hero.headline||c.hero.headlinePop){var h=el('cms-h1'); if(h) h.innerHTML=esc(c.hero.headline)+' <span class="pop">'+esc(c.hero.headlinePop)+'</span>';}
-          setText('cms-lead',c.hero.lead); setSrc('cms-logo',c.hero.logo); } }catch(e){}
-
-        try{ if(Array.isArray(c.books)&&c.books.length){
-          setHTML('books-grid', c.books.map(bookCard).join(''));
-          setHTML('bundle-books', c.books.map(bundleThumb).join(''));
-          attachCardTilt();
-        } }catch(e){}
-
-        try{ if(Array.isArray(c.peek)&&c.peek.length){ setHTML('peekTrack', c.peek.map(peekSlide).join('')); } }catch(e){}
-        try{ if(Array.isArray(c.why)&&c.why.length){ setHTML('why-grid', c.why.map(whyCard).join('')); } }catch(e){}
-        try{ if(Array.isArray(c.reviews)&&c.reviews.length){ setHTML('review-grid', c.reviews.map(reviewCard).join('')); } }catch(e){}
-
-        try{ if(c.bundle){ setText('cms-bundle-heading',c.bundle.heading); setText('cms-bundle-blurb',c.bundle.blurb);
-          setText('cms-price',c.bundle.price); setText('cms-price-note',c.bundle.priceNote);
-          if(Array.isArray(c.bundle.items)&&c.bundle.items.length) setHTML('bundle-list', c.bundle.items.map(function(s){return '<li>'+esc(s)+'</li>';}).join('')); } }catch(e){}
-
-        try{ if(c.about){ setText('cms-about-heading',c.about.heading); setText('cms-about-body1',c.about.body1); setText('cms-about-body2',c.about.body2);
-          if(c.about.photo){var ap=el('cms-about-photo'); if(ap) ap.innerHTML='<img src="'+at(c.about.photo)+'" alt="The founder of Caribbean for Kids" style="width:100%;height:100%;object-fit:cover;border-radius:var(--r-lg);">';} } }catch(e){}
-
-        try{ if(c.contact){ var ct=c.contact;
-          setText('cms-address',ct.address); setHref('cms-instagram',ct.instagramUrl);
-          if(ct.whatsappNumber){ var w=el('cms-whatsapp'); if(w) w.setAttribute('href','https://wa.me/'+ct.whatsappNumber+'?text=Hi%20Caribbean%20for%20Kids!%20I%27d%20like%20to%20ask%20about%20your%20books.'); }
-          if(ct.phoneDisplay){ var p=el('cms-phone'); if(p){ p.textContent=ct.phoneDisplay; if(ct.whatsappNumber) p.setAttribute('href','tel:+'+ct.whatsappNumber); } }
-          if(ct.email){ var em=el('cms-email'); if(em){ em.textContent=ct.email; em.setAttribute('href','mailto:'+ct.email); } } } }catch(e){}
-      })
-      .catch(function(){});
-  })();
 </script>
 </body>
 </html>

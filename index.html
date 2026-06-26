@@ -58,7 +58,7 @@
   .wrap{width:min(1150px,92vw);margin-inline:auto;}
   .btn{
     --bg:var(--coral); --fg:#fff;
-    display:inline-flex;align-items:center;gap:.55em;
+    display:inline-flex;align-items:center;justify-content:center;gap:.55em;
     background:var(--bg);color:var(--fg);
     font-family:'Baloo 2',cursive;font-weight:700;font-size:1.05rem;
     padding:.85em 1.6em;border-radius:999px;border:0;cursor:pointer;
@@ -263,7 +263,7 @@
       radial-gradient(120% 80% at 10% 0%, rgba(28,160,227,.25), transparent 55%),
       linear-gradient(160deg,var(--navy),#10309a);
     color:#fff;border-radius:var(--r-lg);padding:clamp(2rem,5vw,3.5rem);box-shadow:var(--shadow);
-    display:grid;grid-template-columns:1.1fr .9fr;gap:2.5rem;align-items:center;position:relative;overflow:visible;}
+    display:grid;grid-template-columns:1.1fr .9fr;gap:2.5rem;align-items:center;position:relative;overflow:hidden;}
   @media(max-width:780px){.bundle{grid-template-columns:1fr;text-align:center;}}
   .bundle h2{color:#fff;font-size:clamp(1.8rem,4.5vw,2.8rem);}
   .bundle .price{font-family:'Baloo 2';font-weight:800;font-size:clamp(2.6rem,7vw,4rem);color:var(--sun);line-height:1;margin:.6rem 0;}
@@ -345,21 +345,47 @@
   #toTop.show{opacity:1;pointer-events:auto;}
   #toTop:hover{transform:translateY(-4px);}
 
-  /* ---------- preview gate + ribbon (removed at handoff) ---------- */
-  #preview-gate{position:fixed;inset:0;z-index:99999;background:linear-gradient(160deg,#0b1e5b,#10309a);
-    display:flex;align-items:center;justify-content:center;padding:1.5rem;}
-  #preview-gate .box{background:#fff;border-radius:22px;padding:2.2rem;max-width:390px;width:100%;text-align:center;
-    box-shadow:0 30px 60px -20px rgba(0,0,0,.55);}
-  #preview-gate .box .em{font-size:2.4rem;}
-  #preview-gate h2{font-family:'Baloo 2';color:var(--navy);font-size:1.6rem;margin:.3rem 0 .2rem;}
-  #preview-gate p{color:var(--ink-soft);font-size:.95rem;margin:0 0 1.1rem;}
-  #preview-gate input{width:100%;border:2px solid #e4e9f3;border-radius:12px;padding:.75em .9em;font:inherit;background:#fbfcff;}
-  #preview-gate input:focus{outline:none;border-color:var(--ocean);box-shadow:0 0 0 4px rgba(28,160,227,.16);}
-  #preview-gate button{width:100%;margin-top:.7rem;justify-content:center;}
-  #preview-gate .err{color:var(--coral);font-weight:700;font-size:.85rem;min-height:1.1em;margin-top:.5rem;}
-  #preview-ribbon{position:fixed;top:18px;left:-52px;transform:rotate(-45deg);z-index:99998;
-    background:var(--coral);color:#fff;font-family:'Baloo 2';font-weight:700;font-size:.72rem;letter-spacing:.05em;
-    padding:.35em 3.6em;box-shadow:var(--shadow-sm);pointer-events:none;}
+  /* ---------- permanent brand ribbon ---------- */
+  /* permanent brand badge (simple horizontal pill, auto-centered) */
+  #brand-ribbon{position:fixed;left:16px;bottom:16px;z-index:99998;display:inline-flex;align-items:center;gap:.45em;
+    background:var(--coral);color:#fff;font-family:'Baloo 2';font-weight:700;font-size:.85rem;letter-spacing:.04em;
+    padding:.55em 1.1em;border-radius:999px;box-shadow:0 8px 18px -6px rgba(0,0,0,.4);pointer-events:none;}
+
+  /* ---------- book card actions ---------- */
+  .book-actions{display:flex;flex-direction:column;gap:.5rem;margin-top:.2rem;}
+  .book-actions-row{display:flex;gap:.5rem;}
+  .book-actions-row .btn{flex:1;font-size:.9rem;padding:.62em .5em;}
+  .btn--peek{--bg:var(--navy);--fg:#fff;}
+  .btn--tut{--bg:var(--ocean);--fg:#fff;}
+  .book-actions .buy{width:100%;}
+
+  /* ---------- lightbox (per-book Peek Inside) ---------- */
+  .lightbox{position:fixed;inset:0;z-index:99990;display:none;align-items:center;justify-content:center;
+    background:rgba(8,14,38,.93);padding:2rem 1rem;}
+  .lightbox.open{display:flex;}
+  .lb-stage{max-width:min(1000px,92vw);max-height:82vh;display:flex;align-items:center;justify-content:center;}
+  .lb-stage img{max-width:100%;max-height:82vh;border-radius:14px;box-shadow:0 20px 60px -20px rgba(0,0,0,.7);background:#fff;}
+  .lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:54px;height:54px;border-radius:50%;border:0;cursor:pointer;
+    background:var(--coral);color:#fff;font-size:1.8rem;line-height:1;display:flex;align-items:center;justify-content:center;
+    box-shadow:var(--shadow);transition:transform .15s;}
+  .lb-nav:hover{transform:translateY(-50%) scale(1.08);}
+  .lb-prev{left:max(1rem,3vw);} .lb-next{right:max(1rem,3vw);}
+  .lb-close{position:absolute;top:18px;right:22px;width:46px;height:46px;border-radius:50%;border:0;cursor:pointer;
+    background:rgba(255,255,255,.18);color:#fff;font-size:1.8rem;line-height:1;}
+  .lb-close:hover{background:rgba(255,255,255,.32);}
+  .lb-caption{position:absolute;bottom:20px;left:0;right:0;text-align:center;color:#fff;font-family:'Baloo 2';font-weight:600;font-size:1rem;padding:0 1rem;}
+  @media(max-width:560px){.lb-nav{width:44px;height:44px;font-size:1.4rem;}.lb-prev{left:6px;}.lb-next{right:6px;}}
+
+  /* ---------- bundle moving rays + fun price/button ---------- */
+  .bundle-rays{position:absolute;top:50%;left:50%;width:170%;aspect-ratio:1;transform:translate(-50%,-50%);z-index:0;pointer-events:none;
+    opacity:.13;border-radius:50%;animation:spin 60s linear infinite;
+    background:repeating-conic-gradient(from 0deg, #fff 0deg 3deg, transparent 3deg 11deg);}
+  .bundle > div{position:relative;z-index:1;}
+  #cms-price{display:inline-block;color:#FFE14D;text-shadow:0 3px 0 var(--coral);animation:pricePop 2.4s ease-in-out infinite;}
+  @keyframes pricePop{0%,100%{transform:scale(1) rotate(-1.5deg);}50%{transform:scale(1.07) rotate(1.5deg);}}
+  .btn--order{--bg:#25D366;--fg:#08351c;animation:orderPulse 2s ease-in-out infinite;}
+  .btn--order svg{width:22px;height:22px;fill:currentColor;flex:none;}
+  @keyframes orderPulse{0%,100%{box-shadow:0 10px 24px -10px rgba(37,211,102,.6);transform:translateY(0);}50%{box-shadow:0 16px 30px -10px rgba(37,211,102,.9);transform:translateY(-2px);}}
 
   /* ---------- small-screen / mobile polish ---------- */
   @media(max-width:560px){
@@ -396,47 +422,8 @@
 </head>
 <body>
 
-<!-- ============ PREVIEW GATE (remove at handoff: set PREVIEW_MODE=false below) ============ -->
-<div id="preview-ribbon">PREVIEW · NOT LICENSED</div>
-<div id="preview-gate">
-  <div class="box">
-    <div class="em">🌴</div>
-    <h2>Private preview</h2>
-    <p>This is a proof-of-concept site for Caribbean for Kids. Enter the password to view it.</p>
-    <input id="pg-input" type="password" placeholder="Password" aria-label="Password" autocomplete="off">
-    <button class="btn btn--coral" id="pg-go" type="button">View site</button>
-    <div class="err" id="pg-err"></div>
-  </div>
-</div>
-<script>
-  /* ===========================================================
-     PREVIEW GATE — to hand the finished site over, set
-     PREVIEW_MODE = false (the gate AND the corner ribbon vanish).
-     Change PREVIEW_PASSWORD to whatever you share with the client.
-     Note: this is a deterrent for casual viewers, not hard security
-     (a static site's content is always viewable in the page source).
-     =========================================================== */
-  var PREVIEW_MODE = true;
-  var PREVIEW_PASSWORD = "caribbean2026";
-  (function(){
-    var gate=document.getElementById('preview-gate');
-    var ribbon=document.getElementById('preview-ribbon');
-    if(!PREVIEW_MODE){ if(gate) gate.remove(); if(ribbon) ribbon.remove(); return; }
-    try{ if(sessionStorage.getItem('cfk-preview')==='ok' && gate){ gate.remove(); } }catch(e){}
-    var input=document.getElementById('pg-input');
-    var go=document.getElementById('pg-go');
-    var err=document.getElementById('pg-err');
-    function attempt(){
-      if(input && input.value===PREVIEW_PASSWORD){
-        try{ sessionStorage.setItem('cfk-preview','ok'); }catch(e){}
-        if(gate) gate.remove();
-      } else if(err){ err.textContent='Incorrect password — please try again.'; if(input) input.select(); }
-    }
-    if(go) go.addEventListener('click',attempt);
-    if(input) input.addEventListener('keydown',function(e){ if(e.key==='Enter') attempt(); });
-    if(input) input.focus();
-  })();
-</script>
+<!-- permanent brand ribbon -->
+<div id="brand-ribbon">🌴 PROUDLY CARIBBEAN</div>
 
 <!-- ============ NAV ============ -->
 <header class="nav" id="nav">
@@ -450,7 +437,6 @@
     </button>
     <nav class="nav-links" id="navLinks">
       <a href="#books">Books</a>
-      <a href="#peek">Peek Inside</a>
       <a href="#why">Why Us</a>
       <a href="#bundle">Bundle</a>
       <a href="#about">About</a>
@@ -476,7 +462,7 @@
     <div class="hero-copy">
       <span class="eyebrow" id="cms-hero-eyebrow">Fun • Educational • Caribbean-Inspired</span>
       <h1 id="cms-h1">The Caribbean, <span class="pop">colour&nbsp;by&nbsp;colour.</span></h1>
-      <p class="lead" id="cms-lead">Vibrant activity &amp; colouring books that turn island flags, birds, fruits and dinosaurs into hours of learning and creative play — made for curious kids ages 3–10.</p>
+      <p class="lead" id="cms-lead">Vibrant activity books that turn island flags, birds, fruits, dinosaurs and more into hours of learning and creative play, made for curious kids ages 3–10.</p>
       <div class="hero-cta">
         <a href="#books" class="btn btn--coral btn--lg">Explore the books</a>
         <a href="#bundle" class="btn btn--navy btn--lg">See the 4-book bundle</a>
@@ -512,7 +498,7 @@
     <div class="center" style="max-width:640px;">
       <span class="eyebrow reveal">The Collection</span>
       <h2 class="section-title reveal">Four books, one big adventure</h2>
-      <p class="section-sub center reveal">Each book blends colouring, puzzles and real facts about the region — so kids create <em>and</em> learn.</p>
+      <p class="section-sub center reveal">Each book blends colouring, puzzles, trivia and fun facts about the region, so kids get to express their artistic creativity while learning.</p>
     </div>
 
     <div class="books-grid" id="books-grid">
@@ -524,8 +510,13 @@
         </div>
         <h3>National Flags of the Caribbean</h3>
         <p>Colour the flags that tell each island's story, with fun facts about every nation tucked alongside. A bright intro to geography and culture.</p>
-        <div class="tags"><span class="tag">Colouring</span><span class="tag">Geography</span><span class="tag">Fun facts</span></div>
-        <a href="https://www.amazon.com/dp/B0CVBCLGQ1" id="cms-amz-flags" class="btn btn--green buy" target="_blank" rel="noopener" data-amazon>Buy on Amazon</a>
+        <div class="book-actions">
+          <div class="book-actions-row">
+            <button type="button" class="btn btn--peek" data-peek="flags">Peek Inside</button>
+            <a class="btn btn--tut" href="https://www.youtube.com/@caribbeanforkids" target="_blank" rel="noopener">Tutorial</a>
+          </div>
+          <a href="https://www.amazon.com/dp/B0CVBCLGQ1" class="btn btn--green buy" target="_blank" rel="noopener">Buy on Amazon</a>
+        </div>
       </article>
 
       <!-- DINOS -->
@@ -536,8 +527,13 @@
         </div>
         <h3>Dinos in the Caribbean</h3>
         <p>A T-Rex on the beach, a Triceratops in the rainforest. Coloring, riddles, word searches and crosswords meet prehistoric island fun.</p>
-        <div class="tags"><span class="tag">Colouring</span><span class="tag">Puzzles</span><span class="tag">Riddles</span></div>
-        <a href="https://www.amazon.com/dp/B0CSYLJKFS" id="cms-amz-dinos" class="btn btn--green buy" target="_blank" rel="noopener" data-amazon>Buy on Amazon</a>
+        <div class="book-actions">
+          <div class="book-actions-row">
+            <button type="button" class="btn btn--peek" data-peek="dinos">Peek Inside</button>
+            <a class="btn btn--tut" href="https://www.youtube.com/@caribbeanforkids" target="_blank" rel="noopener">Tutorial</a>
+          </div>
+          <a href="https://www.amazon.com/dp/B0CSYLJKFS" class="btn btn--green buy" target="_blank" rel="noopener">Buy on Amazon</a>
+        </div>
       </article>
 
       <!-- FRUITS -->
@@ -548,8 +544,13 @@
         </div>
         <h3>Fruits of the Caribbean</h3>
         <p>From succulent mangoes to tangy five-fingers — a juicy adventure of colours, shapes and flavours through the region's most beloved fruits.</p>
-        <div class="tags"><span class="tag">Colouring</span><span class="tag">Puzzles</span><span class="tag">Nature</span></div>
-        <a href="https://www.amazon.com/dp/B0CVTMKWNB" id="cms-amz-fruits" class="btn btn--green buy" target="_blank" rel="noopener" data-amazon>Buy on Amazon</a>
+        <div class="book-actions">
+          <div class="book-actions-row">
+            <button type="button" class="btn btn--peek" data-peek="fruits">Peek Inside</button>
+            <a class="btn btn--tut" href="https://www.youtube.com/@caribbeanforkids" target="_blank" rel="noopener">Tutorial</a>
+          </div>
+          <a href="https://www.amazon.com/dp/B0CVTMKWNB" class="btn btn--green buy" target="_blank" rel="noopener">Buy on Amazon</a>
+        </div>
       </article>
 
       <!-- BIRDS -->
@@ -560,35 +561,15 @@
         </div>
         <h3>National Birds of the Caribbean</h3>
         <p>From the colourful Cuban Trogon to the majestic Scarlet Ibis — stunning illustrations, puzzles and facts that spark a love of nature.</p>
-        <div class="tags"><span class="tag">Colouring</span><span class="tag">Wildlife</span><span class="tag">Fun facts</span></div>
-        <a href="https://www.amazon.com/dp/B0CV91JKKS" id="cms-amz-birds" class="btn btn--green buy" target="_blank" rel="noopener" data-amazon>Buy on Amazon</a>
+        <div class="book-actions">
+          <div class="book-actions-row">
+            <button type="button" class="btn btn--peek" data-peek="birds">Peek Inside</button>
+            <a class="btn btn--tut" href="https://www.youtube.com/@caribbeanforkids" target="_blank" rel="noopener">Tutorial</a>
+          </div>
+          <a href="https://www.amazon.com/dp/B0CV91JKKS" class="btn btn--green buy" target="_blank" rel="noopener">Buy on Amazon</a>
+        </div>
       </article>
     </div>
-  </div>
-</section>
-
-<!-- ============ PEEK INSIDE ============ -->
-<section class="section peek" id="peek">
-  <div class="wrap">
-    <div class="center" style="max-width:660px;">
-      <span class="eyebrow reveal">Peek inside</span>
-      <h2 class="section-title reveal">See what's on the pages</h2>
-      <p class="section-sub center reveal">Colouring pages, fun facts, word searches, riddles and crosswords — here's a taste of the activities waiting inside.</p>
-    </div>
-    <div class="peek-wrap reveal">
-      <button class="peek-btn prev" id="peekPrev" aria-label="Previous pages">‹</button>
-      <div class="peek-track" id="peekTrack">
-        <!-- balanced + interleaved by book (Dinos · Birds · Flags). Fruits interior pending an image. -->
-        <figure class="peek-slide"><img src="assets/inside-dinos-funfact.jpg" loading="lazy" alt="Inside Dinos in the Caribbean: a fun-fact page beside a dinosaur colouring page"><figcaption class="cap">Dinos in the Caribbean — facts + colouring</figcaption></figure>
-        <figure class="peek-slide"><img src="assets/inside-birds-woodpecker.jpg" loading="lazy" alt="Inside National Birds of the Caribbean: Guadeloupe Woodpecker fun-fact and colouring page"><figcaption class="cap">National Birds — meet &amp; colour each bird</figcaption></figure>
-        <figure class="peek-slide"><img src="assets/inside-flags-dominica.jpg" loading="lazy" alt="Colour-the-flag page for Dominica with fun facts"><figcaption class="cap">National Flags — colour-the-flag + facts</figcaption></figure>
-        <figure class="peek-slide"><img src="assets/inside-crosswords.jpg" loading="lazy" alt="Jurassic crosswords activity spread from the dinosaur book"><figcaption class="cap">Dinos in the Caribbean — Jurassic crosswords</figcaption></figure>
-        <figure class="peek-slide"><img src="assets/inside-birds-wordsearch.jpg" loading="lazy" alt="Caribbean birds word-search puzzles spread"><figcaption class="cap">National Birds — word-search puzzles</figcaption></figure>
-        <figure class="peek-slide"><img src="assets/inside-flags-trinidad.jpg" loading="lazy" alt="Colour-the-flag page for Trinidad &amp; Tobago"><figcaption class="cap">National Flags — every nation to colour</figcaption></figure>
-      </div>
-      <button class="peek-btn next" id="peekNext" aria-label="Next pages">›</button>
-    </div>
-    <p class="peek-hint">← swipe or drag to browse →</p>
   </div>
 </section>
 
@@ -601,7 +582,7 @@
       <p class="section-sub center reveal">Grown-ups get the educational value; little ones just think they're having fun. Everybody wins.</p>
     </div>
     <div class="why-grid" id="why-grid">
-      <div class="why-card reveal d1"><div class="ico">🎨</div><h3>Create &amp; colour</h3><p>Activity-packed pages that build focus, fine motor skills and a whole lot of pride.</p></div>
+      <div class="why-card reveal d1"><div class="ico">🎨</div><h3>Create &amp; colour</h3><p>Activity-packed pages that build focus, develop motor skills and strengthen that Caribbean pride.</p></div>
       <div class="why-card reveal d2"><div class="ico">🧠</div><h3>Sneaky learning</h3><p>Real facts about flags, birds, fruits and dinos — geography and nature without the homework feeling.</p></div>
       <div class="why-card reveal d3"><div class="ico">🌴</div><h3>Proudly Caribbean</h3><p>Kids see their region celebrated — a meaningful gift for home, classroom or homeschooling.</p></div>
       <div class="why-card reveal d4"><div class="ico">🎁</div><h3>Gift-ready</h3><p>Perfect for birthdays and holidays. The bundle even comes with coloured pencils.</p></div>
@@ -613,6 +594,7 @@
 <section class="section" id="bundle">
   <div class="wrap">
     <div class="bundle reveal">
+      <span class="bundle-rays" aria-hidden="true"></span>
       <div>
         <span class="eyebrow" style="background:rgba(255,200,61,.2);color:var(--sun);">Best value</span>
         <h2 id="cms-bundle-heading">The 4-Book Bundle</h2>
@@ -625,7 +607,7 @@
           <li>Bonus 12-pack of coloured pencils</li>
           <li>Nationwide delivery available (+TT$40)</li>
         </ul>
-        <a href="https://wa.me/18684665437?text=Hi%21%20I%27d%20like%20to%20order%20the%20Caribbean%20for%20Kids%204-book%20bundle%20%28TT%24200%20%2F%20US%2430%29." class="btn btn--sun btn--lg" target="_blank" rel="noopener">Order on WhatsApp</a>
+        <a href="https://wa.me/18684665437?text=Hi%21%20I%27d%20like%20to%20order%20the%20Caribbean%20for%20Kids%204-book%20bundle%20%28TT%24200%20%2F%20US%2430%29." class="btn btn--order btn--lg" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M.06 24l1.68-6.16a11.87 11.87 0 01-1.6-5.95C.14 5.34 5.5 0 12.06 0a11.82 11.82 0 018.42 3.49 11.82 11.82 0 013.48 8.41c0 6.56-5.35 11.9-11.9 11.9a11.9 11.9 0 01-5.7-1.45L.06 24zM6.6 20.13c1.68 1 3.28 1.6 5.4 1.6 5.44 0 9.88-4.43 9.88-9.88 0-5.46-4.44-9.9-9.9-9.9S2.1 6.49 2.1 11.95a9.82 9.82 0 001.52 5.25l-.99 3.61 3.97-1.04zm11.39-5.66c-.07-.12-.27-.2-.57-.35-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.88 1.21 3.08.15.2 2.09 3.2 5.07 4.48.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.69.25-1.28.17-1.41z"/></svg>Order on WhatsApp</a>
       </div>
       <div class="bundle-books" id="bundle-books" aria-hidden="true">
         <div class="mini"><img src="assets/cover-flags.jpg" alt=""></div>
@@ -662,9 +644,9 @@
       <p class="section-sub center reveal">Real stories from the families and classrooms who've made these books part of their day.</p>
     </div>
     <div class="review-grid" id="review-grid">
-      <div class="review reveal d1"><div class="stars">★★★★★</div><p>"My three-year-old asks for her 'Caribbean book' every evening. She's learned our flag and half the islands' colours without realising she's learning — and the pages actually hold up to a toddler. Beautiful work."</p><div class="who">— Melissa Dolly, Arima</div></div>
-      <div class="review reveal d2"><div class="stars">★★★★★</div><p>"I got the bundle for my two and it's the first thing they reach for instead of a screen. The fruits and birds books sparked so many questions about home. Worth every cent."</p><div class="who">— Sherain Demming, San Fernando</div></div>
-      <div class="review reveal d3"><div class="stars">★★★★★</div><p>"Raising my kids in New York, these books are how they stay connected to where we're from. Colouring the flags and reading the fun facts has them proud of their Caribbean roots — a wonderful gift from home."</p><div class="who">— Randy Romain, New York</div></div>
+      <div class="review reveal d1"><div class="stars">★★★★★</div><p>"My four-year-old asks for her 'Caribbean book' every evening. She's learned our flag and half the islands' colours without realising she's learning, and the pages actually hold up to a toddler. Beautiful work."</p><div class="who">— Monique Williams, Diego Martin</div></div>
+      <div class="review reveal d2"><div class="stars">★★★★★</div><p>"I got the bundle for my two and it's the first thing they reach for instead of a screen. The fruits and birds books sparked so many questions about home. Worth every cent."</p><div class="who">— Amryl Pierre, Arima</div></div>
+      <div class="review reveal d3"><div class="stars">★★★★★</div><p>"Raising my kids in New York, these books are how they stay connected to where we're from. Colouring the flags and reading the fun facts has them proud of their Caribbean roots, a wonderful gift from home."</p><div class="who">— Randy Romain, New York</div></div>
     </div>
   </div>
 </section>
@@ -688,7 +670,7 @@
     <!-- compact info cards -->
     <div class="contact-cards">
       <div class="contact-card reveal d1"><div class="ico">📞</div><h3>Call us</h3><a href="tel:+18684665437" id="cms-phone">1-868-466-KIDS (5437)</a></div>
-      <div class="contact-card reveal d2"><div class="ico">✉️</div><h3>Email</h3><a href="mailto:hello@caribbeanforkids.com" id="cms-email">hello@caribbeanforkids.com</a></div>
+      <div class="contact-card reveal d2"><div class="ico">✉️</div><h3>Email</h3><a href="mailto:caribbeanforkids@gmail.com" id="cms-email">caribbeanforkids@gmail.com</a></div>
       <div class="contact-card reveal d3"><div class="ico">📍</div><h3>Visit us</h3><p id="cms-address">Trini Smart Driver,<br>Heartland Plaza, Endeavour</p></div>
       <div class="contact-card reveal d4"><div class="ico">💛</div><h3>Follow us</h3>
         <a class="social-chip" id="cms-instagram" href="https://instagram.com/caribbeanforkids" target="_blank" rel="noopener" aria-label="Instagram">
@@ -707,6 +689,15 @@
 </footer>
 
 <button id="toTop" aria-label="Back to top">↑</button>
+
+<!-- per-book Peek Inside lightbox -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lb-close" id="lbClose" aria-label="Close gallery">×</button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous page">‹</button>
+  <div class="lb-stage"><img id="lbImg" src="" alt=""></div>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Next page">›</button>
+  <div class="lb-caption" id="lbCaption"></div>
+</div>
 
 <script>
   // generate sun rays
@@ -765,15 +756,35 @@
   }
   attachCardTilt();
 
-  // peek-inside slider arrows
+  // per-book Peek Inside lightbox
   (function(){
-    const track=document.getElementById('peekTrack');
-    const prev=document.getElementById('peekPrev');
-    const next=document.getElementById('peekNext');
-    if(!track||!prev||!next)return;
-    const step=()=>{const s=track.querySelector('.peek-slide');return s?s.getBoundingClientRect().width+20:360;};
-    next.addEventListener('click',()=>track.scrollBy({left:step(),behavior:'smooth'}));
-    prev.addEventListener('click',()=>track.scrollBy({left:-step(),behavior:'smooth'}));
+    var PEEK={
+      flags:{title:'National Flags of the Caribbean', n:8, prefix:'assets/peek-flags-'},
+      dinos:{title:'Dinos in the Caribbean', n:4, prefix:'assets/peek-dinos-'},
+      fruits:{title:'Fruits of the Caribbean', n:7, prefix:'assets/peek-fruits-'},
+      birds:{title:'National Birds of the Caribbean', n:8, prefix:'assets/peek-birds-'}
+    };
+    var lb=document.getElementById('lightbox'), img=document.getElementById('lbImg'), cap=document.getElementById('lbCaption');
+    if(!lb||!img)return;
+    var cur=[], idx=0, title='';
+    function render(){ img.src=cur[idx]; img.alt=title+' sample page '+(idx+1); cap.textContent=title+'  ('+(idx+1)+' of '+cur.length+')'; }
+    function open(book){
+      var d=PEEK[book]; if(!d)return;
+      cur=[]; for(var i=1;i<=d.n;i++){ cur.push(d.prefix+i+'.jpg'); }
+      title=d.title; idx=0; render();
+      lb.classList.add('open'); lb.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+    }
+    function close(){ lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); document.body.style.overflow=''; img.src=''; }
+    function go(n){ idx=(idx+n+cur.length)%cur.length; render(); }
+    document.querySelectorAll('[data-peek]').forEach(function(b){ b.addEventListener('click',function(){ open(b.getAttribute('data-peek')); }); });
+    document.getElementById('lbPrev').addEventListener('click',function(){ go(-1); });
+    document.getElementById('lbNext').addEventListener('click',function(){ go(1); });
+    document.getElementById('lbClose').addEventListener('click',close);
+    lb.addEventListener('click',function(e){ if(e.target===lb) close(); });
+    document.addEventListener('keydown',function(e){
+      if(!lb.classList.contains('open'))return;
+      if(e.key==='Escape')close(); else if(e.key==='ArrowRight')go(1); else if(e.key==='ArrowLeft')go(-1);
+    });
   })();
 
 </script>
